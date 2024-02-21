@@ -1,0 +1,4 @@
+baseURL = 'https://pratclot.com/'
+languageCode = 'en-us'
+title = 'Orange Days'
+theme = 'ananke'

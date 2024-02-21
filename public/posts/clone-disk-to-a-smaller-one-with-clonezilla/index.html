@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Clone Disk to a Smaller One With Clonezilla | Orange Days</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
+In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.
+New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.">
+    <meta name="generator" content="Hugo 0.123.1">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+  
+    <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/center.css">
+  
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/">
+    
+
+    <meta property="og:title" content="Clone Disk to a Smaller One With Clonezilla" />
+<meta property="og:description" content="Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
+In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.
+New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-04T22:47:35+00:00" />
+<meta property="article:modified_time" content="2022-12-04T22:47:35+00:00" />
+
+<meta itemprop="name" content="Clone Disk to a Smaller One With Clonezilla">
+<meta itemprop="description" content="Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
+In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.
+New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB."><meta itemprop="datePublished" content="2022-12-04T22:47:35+00:00" />
+<meta itemprop="dateModified" content="2022-12-04T22:47:35+00:00" />
+<meta itemprop="wordCount" content="227">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Clone Disk to a Smaller One With Clonezilla"/>
+<meta name="twitter:description" content="Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
+In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.
+New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Orange Days
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Clone Disk to a Smaller One With Clonezilla</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-12-04T22:47:35Z">December 4, 2022</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><figure class="center"><img src="/images/clone-disk-to-a-smaller-one-with-clonezilla/Screenshot_from_2022_12_04_23_06_57_d03e3ffaa3.png"
+         alt="clonezilla image"/>
+</figure>
+
+<p>Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.</p>
+<p>In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.</p>
+<p>New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.</p>
+<p>For some reason, it was not possible to create partitions automatically - the creation of the last one would always get out of boundary and fail everything.</p>
+<p>A comment <a href="https://superuser.com/a/1361409">here</a> hints that you can tell Clonezilla to skip partition creation altogether, and create them by hand yourself.</p>
+<p>I ended up skipping D: and the recovery image and restoring only first 4 partitions. This worked well to boot Windows (but without recovery partition it was not possible to go to safe mode etc).</p>
+<p>Now, the most interesting part. I used shell in Clonezilla to create the partitions. With the backup directory mounted, I located a partition table dump made by <code>sfdisk</code>. I have commented out last two partitions, and used <code>sfdisk</code> to restore the remaining 4 with the dump file. It was very handy to have this file there as I really did not want to know where each partition should start and end.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Orange Days 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Orange Days</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Orange Days</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Dec 2022 21:00:43 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Heroes 3 tricks to extract more joy from the game</title>
+      <link>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</link>
+      <pubDate>Mon, 12 Dec 2022 21:00:43 +0000</pubDate>
+      <guid>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</guid>
+      <description>I love to play random maps in Heroes 3 (original complete edition with the amazing HD Launcher) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.&#xA;I remember coming across someone else&amp;rsquo;s saved games on our hostel&amp;rsquo;s LAN during my university days.</description>
+    </item>
+  </channel>
+</rss>
