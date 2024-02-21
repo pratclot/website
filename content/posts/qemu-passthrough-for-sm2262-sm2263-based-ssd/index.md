@@ -3,7 +3,7 @@ title = 'Qemu Passthrough for Sm2262 Sm2263 Based Ssd'
 date = 2022-11-02 11:38:56.297000
 +++
 
-{{< figure src="/images/qemu-passthrough-for-sm2262-sm2263-based-ssd/Screenshot_from_2022_11_02_11_39_11_87acee04fb.png" alt="picture of the error in Gnome interface" class="center" >}}
+{{< figure src="./images/Screenshot_from_2022_11_02_11_39_11_87acee04fb.png" alt="picture of the error in Gnome interface" class="center" >}}
 
 I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described [here](https://bugzilla.kernel.org/show_bug.cgi?id=202055#c42):
 

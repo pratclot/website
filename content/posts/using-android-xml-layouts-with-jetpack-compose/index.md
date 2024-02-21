@@ -4,7 +4,7 @@ date = 2022-11-03 16:51:39.276000
 draft = false
 +++
 
-{{< figure src="/images/using-android-xml-layouts-with-jetpack-compose/Screenshot_from_2022_11_03_16_50_26_9e06e66dfc.png" alt="heroes-logo" class="center" >}}
+{{< figure src="./images/Screenshot_from_2022_11_03_16_50_26_9e06e66dfc.png" alt="heroes-logo" class="center" >}}
 
 The documentation suggests to use AndroidViewBinding API for the task.
 

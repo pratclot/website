@@ -3,7 +3,7 @@ title = 'Jetpack Compose Navigation Handling of Hilt View Model'
 date = 2022-11-04 23:33:47.085000
 draft = false
 +++
-{{< figure src="/images/jetpack-compose-navigation-handling-of-hilt-view-model/Screenshot_from_2022_11_04_23_35_16_f654b730eb.png" alt="hilt-logo" class="center" >}}
+{{< figure src="./images/Screenshot_from_2022_11_04_23_35_16_f654b730eb.png" alt="hilt-logo" class="center" >}}
 
 Suppose you want to re-use a ViewModel across two full-screen composables, and for some reason you rely on `hiltViewModel()` from `androidx.hilt:hilt-navigation-compose:1.0.0`:
 

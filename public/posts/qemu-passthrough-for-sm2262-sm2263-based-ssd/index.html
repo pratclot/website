@@ -54,7 +54,7 @@
 <meta itemprop="description" content="I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described here:
 &lt;hostdev mode=&#34;subsystem&#34; type=&#34;pci&#34; managed=&#34;yes&#34;&gt; &lt;source&gt; &lt;address domain=&#34;0x0000&#34; bus=&#34;0x6f&#34; slot=&#34;0x00&#34; function=&#34;0x0&#34;/&gt; &lt;/source&gt; &lt;boot order=&#34;1&#34;/&gt; &lt;alias name=&#34;ua-sm2262&#34;/&gt; &lt;address type=&#34;pci&#34; domain=&#34;0x0000&#34; bus=&#34;0x00&#34; slot=&#34;0x07&#34; function=&#34;0x0&#34;/&gt; &lt;/hostdev&gt; &lt;qemu:commandline&gt; &lt;qemu:arg value=&#34;-set&#34;/&gt; &lt;qemu:arg value=&#34;device.ua-sm2262.x-msix-relocation=bar2&#34;/&gt; &lt;/qemu:commandline&gt; Since some release of qemu it seems to no longer work and give an error message like this:"><meta itemprop="datePublished" content="2022-11-02T11:38:56+00:00" />
 <meta itemprop="dateModified" content="2022-11-02T11:38:56+00:00" />
-<meta itemprop="wordCount" content="129">
+<meta itemprop="wordCount" content="128">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Qemu Passthrough for Sm2262 Sm2263 Based Ssd"/>
 <meta name="twitter:description" content="I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described here:
 &lt;hostdev mode=&#34;subsystem&#34; type=&#34;pci&#34; managed=&#34;yes&#34;&gt; &lt;source&gt; &lt;address domain=&#34;0x0000&#34; bus=&#34;0x6f&#34; slot=&#34;0x00&#34; function=&#34;0x0&#34;/&gt; &lt;/source&gt; &lt;boot order=&#34;1&#34;/&gt; &lt;alias name=&#34;ua-sm2262&#34;/&gt; &lt;address type=&#34;pci&#34; domain=&#34;0x0000&#34; bus=&#34;0x00&#34; slot=&#34;0x07&#34; function=&#34;0x0&#34;/&gt; &lt;/hostdev&gt; &lt;qemu:commandline&gt; &lt;qemu:arg value=&#34;-set&#34;/&gt; &lt;qemu:arg value=&#34;device.ua-sm2262.x-msix-relocation=bar2&#34;/&gt; &lt;/qemu:commandline&gt; Since some release of qemu it seems to no longer work and give an error message like this:"/>
@@ -130,7 +130,7 @@
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><figure class="center"><img src="/images/qemu-passthrough-for-sm2262-sm2263-based-ssd/Screenshot_from_2022_11_02_11_39_11_87acee04fb.png"
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><figure class="center"><img src="./images/Screenshot_from_2022_11_02_11_39_11_87acee04fb.png"
          alt="picture of the error in Gnome interface"/>
 </figure>
 
@@ -157,7 +157,6 @@
       &lt;/qemu:frontend&gt;
     &lt;/qemu:device&gt;
   &lt;/qemu:override&gt;
-  ```                                          
 </code></pre><ul class="pa0">
   
 </ul>

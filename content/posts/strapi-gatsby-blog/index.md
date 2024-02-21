@@ -4,7 +4,7 @@ date = 2022-11-02 13:13:31.319000
 +++
 
 
-{{< figure src="/images/strapi-gatsby-blog/Screenshot_from_2022_11_02_13_14_20_31889ed3e1.png" alt="strapi site picture" class="center" >}}
+{{< figure src="./images/Screenshot_from_2022_11_02_13_14_20_31889ed3e1.png" alt="strapi site picture" class="center" >}}
 
 Here is the path I took to host my personal site with Strapi + Gatsby setup.
 

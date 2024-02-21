@@ -3,7 +3,7 @@ title = 'Encrypting Existing Linux Installation'
 date = 2022-11-01 23:38:50.325000
 +++
 
-{{< figure src="/images/encrypting-existing-linux-installation/Screenshot_from_2022_11_03_15_02_35_d5756d2021.png" alt="picture of Ubuntu asking for a password to decrypt root disk" class="center" >}}
+{{< figure src="./images/Screenshot_from_2022_11_03_15_02_35_d5756d2021.png" alt="picture of Ubuntu asking for a password to decrypt root disk" class="center" >}}
 
 I have an Arch (Gnome) on one physical disk and Ubuntu on another. At some point I decided to encrypt the Ubuntu installation.
 Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate boot /dev/nvme1n1p2 device to keep grub on, and it had its benefits too. Main bootloader lives on the Arch disk.
@@ -14,7 +14,7 @@ Ubuntu uses initramfs, Arch has mkinitcpio, I could not follow the HOOKS part on
 
  - I used Arch to mount the encrypted /dev/nvme1n1p1 device, in Gnome you can use the friendly Disks tool. Notice there are two UUIDs here - for the LUKS container and the actual rootfs. We will need the LUKS one, the second one is used inside /etc/fstab, which is read after the boot and is not related to the decrypting steps here:
  
-![Screenshot from 2022-10-29 21-39-27.png](/images/encrypting-existing-linux-installation/Screenshot_from_2022_10_29_21_39_27_8b7f5b2804.png)
+![Screenshot from 2022-10-29 21-39-27.png](./images/Screenshot_from_2022_10_29_21_39_27_8b7f5b2804.png)
 
 - then as root in the terminal run arch-chroot on the mountpoint of the Ubuntu installation (if you are not on Arch, you will need to mount dev, proc and all that manually). I had to also perform PATH setting for some reason:
 
@@ -96,7 +96,7 @@ These are the directives for the grub config file, UUID is that of /dev/nvme1n1p
 
 I used Grub Customizer on Arch to add another boot entry to its grub:
 
-![Screenshot from 2022-11-01 23-47-53.png](/images/encrypting-existing-linux-installation/Screenshot_from_2022_11_01_23_47_53_e58058e5a4.png)
+![Screenshot from 2022-11-01 23-47-53.png](./images/Screenshot_from_2022_11_01_23_47_53_e58058e5a4.png)
 
 When grub loads misconfigured initramfs you drop into shell:
 

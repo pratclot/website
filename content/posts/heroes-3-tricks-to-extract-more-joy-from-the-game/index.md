@@ -3,7 +3,7 @@ title = 'Heroes 3 tricks to extract more joy from the game'
 date = 2022-12-12 21:00:43.064000
 draft = false
 +++
-{{< figure src="/images/heroes-3-tricks-to-extract-more-joy-from-the-game/Screenshot_from_2022_12_12_21_00_20_373890e61e.png" alt="heroes-logo" class="center" >}}
+{{< figure src="./images/Screenshot_from_2022_12_12_21_00_20_373890e61e.png" alt="heroes-logo" class="center" >}}
 
 I love to play random maps in Heroes 3 (original complete edition with the amazing [HD Launcher](https://sites.google.com/site/heroes3hd)) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.
 

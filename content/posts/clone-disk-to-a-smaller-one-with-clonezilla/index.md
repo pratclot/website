@@ -3,7 +3,7 @@ title = 'Clone Disk to a Smaller One With Clonezilla'
 date = 2022-12-04 22:47:35.600000
 draft = false
 +++
-{{< figure src="/images/clone-disk-to-a-smaller-one-with-clonezilla/Screenshot_from_2022_12_04_23_06_57_d03e3ffaa3.png" alt="clonezilla image" class="center" >}}
+{{< figure src="./images/Screenshot_from_2022_12_04_23_06_57_d03e3ffaa3.png" alt="clonezilla image" class="center" >}}
 
 Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
 

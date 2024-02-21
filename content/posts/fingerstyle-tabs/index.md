@@ -4,7 +4,7 @@ date = 2022-11-02 00:22:10.451000
 +++
 
 
-{{< figure src="/images/fingerstyle-tabs/photo_2022_11_02_00_19_59_36945e4e21.jpg" alt="heroes-logo" class="center" >}}
+{{< figure src="./images/photo_2022_11_02_00_19_59_36945e4e21.jpg" alt="heroes-logo" class="center" >}}
 
 I learnt how to play things on the guitar mostly because of great tabs published at https://frettedinstrumentsnyc.com. For me this was the only way to stay learning, because just doing "exercises" makes no sense to my brain as there is no music produced that is remotely pleasurable to hear.
 

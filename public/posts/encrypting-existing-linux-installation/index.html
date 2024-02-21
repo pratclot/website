@@ -130,7 +130,7 @@ I followed the steps on Arch wiki, but during the boot there was no prompt to pu
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><figure class="center"><img src="/images/encrypting-existing-linux-installation/Screenshot_from_2022_11_03_15_02_35_d5756d2021.png"
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><figure class="center"><img src="./images/Screenshot_from_2022_11_03_15_02_35_d5756d2021.png"
          alt="picture of Ubuntu asking for a password to decrypt root disk"/>
 </figure>
 
@@ -141,7 +141,7 @@ Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate
 <ul>
 <li>I used Arch to mount the encrypted /dev/nvme1n1p1 device, in Gnome you can use the friendly Disks tool. Notice there are two UUIDs here - for the LUKS container and the actual rootfs. We will need the LUKS one, the second one is used inside /etc/fstab, which is read after the boot and is not related to the decrypting steps here:</li>
 </ul>
-<p><img src="/images/encrypting-existing-linux-installation/Screenshot_from_2022_10_29_21_39_27_8b7f5b2804.png" alt="Screenshot from 2022-10-29 21-39-27.png"></p>
+<p><img src="./images/Screenshot_from_2022_10_29_21_39_27_8b7f5b2804.png" alt="Screenshot from 2022-10-29 21-39-27.png"></p>
 <ul>
 <li>then as root in the terminal run arch-chroot on the mountpoint of the Ubuntu installation (if you are not on Arch, you will need to mount dev, proc and all that manually). I had to also perform PATH setting for some reason:</li>
 </ul>
@@ -201,7 +201,7 @@ Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate
 </span></span><span style="display:flex;"><span>       configfile /grub/grub.cfg
 </span></span></code></pre></div><p>These are the directives for the grub config file, UUID is that of /dev/nvme1n1p2, where my second grub lives.</p>
 <p>I used Grub Customizer on Arch to add another boot entry to its grub:</p>
-<p><img src="/images/encrypting-existing-linux-installation/Screenshot_from_2022_11_01_23_47_53_e58058e5a4.png" alt="Screenshot from 2022-11-01 23-47-53.png"></p>
+<p><img src="./images/Screenshot_from_2022_11_01_23_47_53_e58058e5a4.png" alt="Screenshot from 2022-11-01 23-47-53.png"></p>
 <p>When grub loads misconfigured initramfs you drop into shell:</p>
 <p>-picture of shell-</p>
 <p>Sometimes it says what&rsquo;s up, sometimes not. If you type exit it will try to boot again and will hopefully show the error. In my case it could not find /dev/mapper/cryptroot that was declared as root by grub.</p>
