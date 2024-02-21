@@ -4,7 +4,7 @@ date = 2022-11-03 16:51:43.058000
 draft = false
 +++
 
-{{< figure src="./images/knee-deep-in-trouble-merle-travis/Screenshot_from_2022_11_03_16_49_10_050719f434.png" alt="travis smiling" class="center" >}}
+{{< figure src="./images/Screenshot_from_2022_11_03_16_49_10_050719f434.png" alt="travis smiling" class="center" >}}
 
 ```
 (well I'm) kneeeeeeeeeeee
