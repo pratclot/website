@@ -1,4 +1,7 @@
 baseURL = 'https://pratclot.com/'
 languageCode = 'en-us'
 title = 'Orange Days'
-theme = 'ananke'
+theme = 'PaperMod'
+
+[params]
+ShowToc = true
