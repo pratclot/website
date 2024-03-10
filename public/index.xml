@@ -1,16 +1,701 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Orange Days</title><link>http://localhost:1313/</link><description>Recent content on Orange Days</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 08 Mar 2024 18:01:38 +0100</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>Homelab</title><link>http://localhost:1313/posts/homelab/</link><pubDate>Fri, 08 Mar 2024 18:01:38 +0100</pubDate><guid>http://localhost:1313/posts/homelab/</guid><description>Preface I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &amp;ldquo;migration&amp;rdquo;.</description></item><item><title>Heroes 3 tricks to extract more joy from the game</title><link>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</link><pubDate>Mon, 12 Dec 2022 21:00:43 +0000</pubDate><guid>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</guid><description>I love to play random maps in Heroes 3 (original complete edition with the amazing HD Launcher) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.
-I remember coming across someone else&amp;rsquo;s saved games on our hostel&amp;rsquo;s LAN during my university days.</description></item><item><title>Clone Disk to a Smaller One With Clonezilla</title><link>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</link><pubDate>Sun, 04 Dec 2022 22:47:35 +0000</pubDate><guid>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</guid><description>Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Orange Days</title><link>http://localhost:1313/</link><description>Recent content on Orange Days</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 09 Mar 2024 22:01:22 +0100</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>IP Camera Mail Relay</title><link>http://localhost:1313/posts/ip-camera-mail-relay/</link><pubDate>Sat, 09 Mar 2024 22:01:22 +0100</pubDate><guid>http://localhost:1313/posts/ip-camera-mail-relay/</guid><description>I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.
+There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.</description><content:encoded>&lt;p>I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.&lt;/p>
+&lt;p>There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.&lt;/p></content:encoded></item><item><title>Homelab</title><link>http://localhost:1313/posts/homelab/</link><pubDate>Fri, 08 Mar 2024 18:01:38 +0100</pubDate><guid>http://localhost:1313/posts/homelab/</guid><description>Preface I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &amp;ldquo;migration&amp;rdquo;.</description><content:encoded><![CDATA[<h1 id="preface">Preface</h1>
+<p>I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &ldquo;migration&rdquo;.</p>
+<p>I worked as a &ldquo;DevOps&rdquo; guy at the time and was excited about all the tech. I used this VPS to run Gitlab, PowerDNS, Rocket.Chat, Jira, LDAP and a host of other things, all just to allow me to experiment with a &ldquo;live&rdquo; server.</p>
+<p>Then I received an email from Contabo where they explain that &ldquo;the effort required to perform repeated know-your-customer checks has reached such a point where it is no longer feasible for us to provide you with further services&rdquo;. Probably has to do with me being a Russian of course.</p>
+<p>This was a good motivation for me to find another place to have a VPS. Sadly, there was no other provider of that class, the best you could get was 2 ARM CPU / 4 GB RAM for €4 at Hetzner.</p>
+<p>So I thought maybe I could have a home lab instead, and expose it to the internet via a VPS. This approach has a few advantages:</p>
+<ul>
+<li>I am in control of my hardware, which allows me to upgrade it how I see fit for example. Plus a provider can no longer pull the €25 extortion trick just to expand a hard disk and restart my VM with more resources :)</li>
+<li>there is nothing substantial running on the VPS, only a VPN server where the lab connects to and a reverse proxy to publish services. So if I get evicted again I just go to another provider, order the cheapest VPS, bring up the VPN and the proxy, and I am back.</li>
+<li>I can have access to virtualization, attaching devices over USB and such.</li>
+</ul>
+<p>And a couple of downsides of course:</p>
+<ul>
+<li>I am in control of my hardware, so if anything fails there I may potentially have a lot more headache.</li>
+<li>the computers will have to stay somewhere in the house, i.e. there most likely will be a new source of unwanted noise and changes to electricity bill.</li>
+<li>my choice of ISP can affect the quality of service of my self-hosted apps.</li>
+</ul>
+<p>Obviously, for me it was exciting to have new hardware at home, so I did not pay a lot of attention to the downsides (apart from the noise one). This is what I bought at the end of 2023 - beginning of 2024:</p>
+<table>
+<thead>
+<tr>
+<th>node</th>
+<th>CPU</th>
+<th>RAM</th>
+<th>DISK</th>
+<th>NIC</th>
+<th>cost</th>
+<th>cost breakdown: base + boot disk + storage + RAM + WiFi + Fan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NUC 12 tall</td>
+<td>i3</td>
+<td>32</td>
+<td>256 + 960</td>
+<td>2.5G x1</td>
+<td>€433</td>
+<td>300 + 30 + 43 + 60 + 0 + 0</td>
+</tr>
+<tr>
+<td>NUC 12</td>
+<td>i3</td>
+<td>32</td>
+<td>256 + 960</td>
+<td>2.5G x1</td>
+<td>€499</td>
+<td>340 + 25 + 74 + 60 + 0 + 0</td>
+</tr>
+<tr>
+<td>Topton Firewall</td>
+<td>N100</td>
+<td>32</td>
+<td>256 + 960</td>
+<td>2.5G x4</td>
+<td>€343</td>
+<td>163 + 22 + 40 + 65 + 40 + 13</td>
+</tr>
+</tbody>
+</table>
+<p>N100 heated its NVMe SSD up to 100°C during initial observations, so I put ARCTIC P14 Slim on top of it. This test was with Proxmox installed there, and now there is plain Debian running with not much going on. It shows 53°C and I am happy.</p>
+<p>The plan was to run Proxmox on NUCs and use Ceph over 2.5G network. But then there was a <a href="https://fangpenlin.com/posts/2024/01/14/high-speed-usb4-mesh-network/">post on hacker news</a> that promised even better performance. Luckily for me, the NUCs have 2 Thunderbolt 4 ports each, which may give me about 32 Gbps of bandwidth. This is 4 GB per second, which is roughly what an NVMe SSD has locally for sequential writes.</p>
+<p>The N100 PC has several purposes:</p>
+<ul>
+<li>providing local network for NUCs, I use it for corosync and VM traffic</li>
+<li>establishing connection to the VPS and exposing VMs to it</li>
+<li>sharing routes to VMs with my laptop</li>
+</ul>
+<p>I did not connect the machines my home network because they are far from the router and I do not want to even think about long cables :) I connected the NUCs to WiFi at first, but then realized they do not need it since N100 can serve as their own Internet gateway. Also, disabled WiFi cards should contribute to power saving and noise levels.</p>
+<p>Now, please keep in mind that none of described configurations were applied from the first attempt. It is always a trial-and-error kind of process (plus lots googling and giving up), and what may look like a simple explanation is often a result of multiple failed designs. I even bought 1 NUC and N100 at first and ran them as Proxmox cluster with Ceph over 2.5G and corosync and VMs over WiFi (you&rsquo;d better believe I put WiFi interface into a bridge, and also used IPv6 exclusively, haha! This sucked a lot, dear God)</p>
+<h1 id="the-setup">The setup</h1>
+<p>I use a standing desk for work, and I bought a tray for keyboard to store laptops when I do not need them. The NUCs need air to be able to stay quiet, so I tried to give them that:
+<img loading="lazy" src="/posts/homelab/images/Screenshot_2024-03-08_23-19-10.png" type="" alt="computers working together"  />
+There were VESA mounts included, so I used these and some electric tape to attach the NUCs upside down. It does not have a lot of style, but the PCs also do not get in my way, which is what I wanted to achieve.</p>
+<p>Curiously, after writing this I now see that there was nothing stopping me from attaching the NUCs directly to the desk.</p>
+<h2 id="storage">Storage</h2>
+<p>I wanted to have an ability to quickly migrate VMs between the nodes, so used Ceph for storage. I know next to nothing about this software, but the UI configuration provided by Proxmox seemed to work well to get me started. At some point I wondered if I am getting good performance out of it, and this led me to try an <a href="https://github.com/vitalif/vitastor">alternative</a>. From what I understand, Ceph itself is the bottleneck when we are discussing performance, and it heavily depends on high-end hardware despite <a href="https://docs.ceph.com/en/quincy/start/hardware-recommendations/">multiple</a> <a href="https://pve.proxmox.com/wiki/Deploy_Hyper-Converged_Ceph_Cluster#chapter_pveceph">places</a> saying that it runs on commodity hardware. Vitaliy did an extraordinary job with vitastor, and also explained in detail how to run <a href="https://yourcmc.ru/wiki/Ceph_performance">benchmarks</a>. For some reason I could not get vitastor to work for me as it was showing the same write performance for processes with iodepth of 1 and more than 1 (even worse for the latter). I noticed this also during qcow2 imports, Ceph was a lot faster. This was sad as vitastor obliterated (up to 3 times faster) Ceph everywhere else (including writes with iodepth=1) and also promised to be lighter on the CPU.</p>
+<p>I followed <a href="https://gist.github.com/scyto/67fdc9a517faefa68f730f82d7fa3570">this</a> guide to get Thunderbolt network going. <code>iperf</code> reported a bandwidth of 20 Gbps. I wonder if I will have 10 Gbps like in the &ldquo;mesh network&rdquo; article if I add a third PC.</p>
+<h2 id="networking">Networking</h2>
+<p>There were two things I needed to setup:</p>
+<ul>
+<li>a cluster network for VMs, so that they can see each other from different Proxmox nodes</li>
+<li>ability to access the VMs from my laptop and from the VPS</li>
+</ul>
+<p>The VLAN zone and some static routes would probably be sufficient now that I think about it. I went with EVPN, and configured a BGP controller to share routes with N100, which further shares them with the VPS and my laptop. That&rsquo;s right, I run frr / quagga on each machine, lol! I never had to work closely with a serious BGP device, but it turned out that it could be done without too much experience (thanks ChatGPT!).</p>
+<p>Now I can have some VMs :)</p>
+<h2 id="vms">VMs</h2>
+<p>I remember I needed to configure proxy-pass directives on nginx by hand to expose the apps running on my VPS. I really did not want to have to do that again. I went with Kubernetes:</p>
+<ul>
+<li>it is super easy to expose web services</li>
+<li>I can get continuous practice with it while working as full-time developer, even though I now prefer to stay away from anything infra (because software development is a lot better than config file development)</li>
+<li>looks good on resume</li>
+</ul>
+<p>(beware, too much k8s stuff)</p>
+<p>So I made 1 VM for the control plane, and 2 worker VMs, all Debian imported from a cloud <a href="https://cloud.debian.org/images/cloud/bookworm/20240211-1654/debian-12-generic-amd64-20240211-1654.qcow2">qcow2</a>. I liked how cloud-init in Proxmox auto-expands the partition.</p>
+<p>I used <code>kubeadm</code> to init the cluster, all the prerequisites like <code>containerd</code> were installed with <code>ansible</code>. I think next time I may try a distribution specifically built to be used with k8s. On the other hand, my new VPS also uses Debian, and I am to run an ingress controller there, so it was quite handy to reuse <code>ansible</code> roles to add it to the cluster.</p>
+<p>In fact, I specifically wanted to describe <strong>everything</strong> I did to the machines through <code>ansible</code>. I even tried to use a Proxmox provider to create VMs via Terraform, but lost patience trying to configure it.</p>
+<p>I then installed Calico for pod networking, at some point there was an idea to expose them through BGP but I never really needed that.</p>
+<p>Finally, I needed a CSI implementation if any of my apps would have persistent data. I figured existing Ceph installation could be reused, especially since it works over a &ldquo;fast&rdquo; Thunderbolt connection. To achieve that I needed to add Thunderbolt interfaces to a bridge, and then connect all worker VMs to it. So far that works well. There was a case where EVPN would eagerly try to redistribute a route to that &ldquo;storage&rdquo; network via 2.5G cluster IP, and some VMs would fail to access Ceph monitors because the packets went to a wrong interface. Luckily, I have faith in <code>tcpdump</code> so was able to see the differences in packet handling between Proxmox nodes, which led me to see the rogue route. ChatGPT helped to create a BGP config, and after 2 days of trying to apply it I was able to filter the route (this again reminded me why I moved away from config development jobs).</p>
+<h2 id="apps">Apps</h2>
+<p>I went with Otomi at first to have an all-in-one pre-configured environment. I needed to change ssh endpoint for Gitea and broke it somehow. Then reset everything and added things manually step-by-step. But it was very useful to see what a developer platform could look like, so Otomi was helpful.</p>
+<p>I installed <code>ingress-nginx</code> to be able to expose the apps locally. I wanted to have a <code>LoadBalancer</code> kind of services and <code>metallb</code> does the job fine. I gave it a range from the VM network so all the apps would appear to me as if they were just another VM.</p>
+<p>I defined a <code>StorageClass</code> (just took a manifest from <code>ceph-csi</code> repository), and added an annotation to make it a default one for the cluster.</p>
+<p>With that present, I installed Gitea from a helm chart. Its configuration is done via a <code>ConfigMap</code>, which is encrypted with base64. To edit it I used <code>k9s</code> with a custom shortcut kind folks shared <a href="https://github.com/derailed/k9s/issues/1017">here</a>.</p>
+<p>Then I figured I would like to have <code>external-dns</code> to automatically create DNS records for <code>Ingress</code> resources. This made me install Pi-hole on the N100 machine, and now my laptop should also benefit from some ad blocking. The gateway router at home is provided by my ISP and it is not very configurable. I also did not yet make a decision to buy my own router that could organize my home network and abstract me from any future ISP, so this N100 machine is a first step in that direction :)</p>
+<p>I added Authentik to be able to login to all my apps with the same credentials. Its integration with Gitea required usage of trusted certificates at some point. I started by adding my self-signed CA to all VMs.</p>
+<p>Then figured I could use Let&rsquo;s Encrypt certificates once the VPS is able to host <code>Ingress</code> resources. So I installed a second <code>ingress-nginx</code> to the cluster, ordered certificates for publicly non-existing services and used them for my internal <code>Ingress</code> resources. This made Gitea and all the browsers happy.</p>
+<p>I then setup some &ldquo;GitOps&rdquo; process with Argo CD to keep track of what I deploy to the cluster.</p>
+<p>Finally, I wanted to host something for the public. There is a <a href="https://gitlab.com/glatteis/earthwalker">fine free game</a> available, so I tried to <a href="https://ew.pratclot.com/">deploy</a> it. I mirrored the repository with Gitea, configured a trigger for Tekton pipeline, setup a Harbor instance, wrote a kaniko pipeline and added a manifest for Argo to keep fresh code running. This required some intense config development, but I like the end result. Specifically, I like the complete CI/CD process at home that deploys something to the public while I sleep.</p>
+<h1 id="noise-levels">Noise levels</h1>
+<p>The NUCs stay quiet when no VMs are running, otherwise they are really annoying :) For now I use:</p>
+<pre tabindex="0"><code>cpupower frequency-set --max 1.5Ghz
+</code></pre><p>and it keeps the fans near their lowest possible RPM setting. This is quite acceptable for a bedroom. As a bonus point, the same command helps me prolong battery life on my laptop!</p>
+<p>I turned audio and WiFi off in BIOS to further help with the heating, but did not test how many watts that saves. Speaking of BIOS, the NUCs have I225-V for their 2.5G Ethernet which seems to be known for frustrating its users by not working :) The tall NUC did exactly that to me, and I was able to &ldquo;fix&rdquo; it by disabling some power management features in BIOS. Strangely, the &ldquo;flat&rdquo; NUC did not upset me like that. Neither did the N100 machine which has I226-V.</p>
+<h1 id="power-consumption">Power consumption</h1>
+<p>I got an ATORCH tool from AliExpress, it reports 50W with 1.5 GHz limit and load average of 0-2, and can reach 100W without frequency limit:
+<img loading="lazy" src="/posts/homelab/images/Screenshot_2024-03-08_23-13-26.png" type="" alt="power meter"  /></p>
+<p>Now that I have the number I could try to substitute all the power bricks with one. The NUCs need 19V and N100 works with 12V. I know as much about this stuff as I know about Ceph, so the plan is to buy a step-up converter for this 300W source, which was supposed to be a part of Ambilight-like system:
+<img loading="lazy" src="/posts/homelab/images/IMG_20240309_094440871.jpg" type="" alt="big power brick"  /></p>
+<h1 id="work-in-progress">Work in progress</h1>
+<p>Ceph cluster fails VMs every 2 days. It looks like <code>logrotate</code> restarts all Ceph processes once it processes the log files, and in the morning I wake up to see VMs failing to access their disks. <code>ceph status</code> says that everything is fine though. For now, I workaround it with <code>pkill -9 -f ceph</code> and <code>cron</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/bin/sleep <span style="color:#ae81ff">60</span> <span style="color:#f92672">&amp;&amp;</span> /usr/sbin/qm list | /usr/bin/awk <span style="color:#e6db74">&#39;/kube/ {system(&#34;/usr/sbin/qm start &#34;$1)}&#39;</span>
+</span></span></code></pre></div><p>Maybe it will work better once I decide to get a third PC.</p>
+<p>The connection between VPS and the control plane periodically dies for some reason:</p>
+<pre tabindex="0"><code># kubectl get po -n calico-system | grep calico-node
+calico-node-9zdjn                          1/1     Running   7 (42h ago)        17d
+calico-node-dv92q                          1/1     Running   7 (42h ago)        17d
+calico-node-jxk47                          1/1     Running   7 (42h ago)        17d
+calico-node-q4jkn                          1/1     Running   3037 (5m38s ago)   17d
+</code></pre>]]></content:encoded></item><item><title>Heroes 3 tricks to extract more joy from the game</title><link>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</link><pubDate>Mon, 12 Dec 2022 21:00:43 +0000</pubDate><guid>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</guid><description>I love to play random maps in Heroes 3 (original complete edition with the amazing HD Launcher) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.
+I remember coming across someone else&amp;rsquo;s saved games on our hostel&amp;rsquo;s LAN during my university days.</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_12_12_21_00_20_373890e61e.png"
+         alt="heroes-logo"/> 
+</figure>
+
+<p>I love to play random maps in Heroes 3 (original complete edition with the amazing <a href="https://sites.google.com/site/heroes3hd">HD Launcher</a>) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.</p>
+<p>I remember coming across someone else&rsquo;s saved games on our hostel&rsquo;s LAN during my university days. One of the save files had a level 20 hero at the start of month 3, with primary skills nearing 20&rsquo;s. I was slightly bothered that the way me and my friend play the game becomes repetitive and boring, and after seeing that we are actually doing what a random fellow student is doing I became even more concerned.</p>
+<p>Some years later, when there was no wish to play the game just because we already knew how we are going to play, we tried to force ourselves to play differently by staying away from our usual strategies. All of a sudden the game became new, fresh, a lot more difficult and enjoyable.</p>
+<p>So, here is a brief summary of what we came up with:</p>
+<ul>
+<li>usage of creatures higher than level 5 is prohibited</li>
+<li>the following spells are banned: Haste, Slow, Blind, Resurrection</li>
+<li>heavy reliance on Advanced Town Portal is strongly discouraged</li>
+<li>Armageddon with fire immune units is banned</li>
+<li>use of offensive spells is discouraged</li>
+<li>each hero can specialize in only one magic school</li>
+<li>(probably an obvious one) even though you are only enjoying a weekend with your friend, try to refrain from loading the game when you make a mistake</li>
+</ul>
+<p>I will provide more details for these rules now.</p>
+<h3 id="higher-level-units">Higher level units</h3>
+<p>Would you prefer an Angel or 30 Griffins? The first one is better because it is harder to kill, right? This is something the game teaches you very early on, and you do not notice how this becomes THE way to play.</p>
+<p>We derived this rule after a series of games with a high rate of Griffin Conservatory abuse. Once you get many high-HP units you become invincible to monsters and the game quickly loses its difficulty. In order to keep the challenge, we just declared that units of level 6 and 7 can no longer be used to any advantage. We still can raid the Griffins for XP, but the Angels have to be dismissed immediately. This added interesting side-effects.</p>
+<p>We no longer have to gather immense amounts of resources for level 7 structures. This sort of lets you play &ldquo;here and now&rdquo; since you will not have these Efreeti later to clean Medusa Stores. Instead, you may invest into Familiars and Cerberi to control the battle and deal damage safely.</p>
+<p>The other one is when you capture a town with, say, Phoenixes already built. You can just keep them un-hired to follow the rule, or hire-and-fire to not let the enemy get them in an event of a siege. The latter is something unheard of for a usual game and is very expensive of course, but strategically favorable.</p>
+<p>An occasional Titan from the Refugee Camp is probably not a big crime though.</p>
+<h3 id="haste-and-slow">Haste and Slow</h3>
+<p>Many probably found themselves in a situation where the most used spells in combat are Haste and Slow. To quote the barkeep:</p>
+<p>&ldquo;The Haste and Slow spells can be powerful allies in combat, especially at higher levels of proficiency&rdquo;</p>
+<p>This is one of those seemingly good habits that hide a large portion of the game from you forever. Ditching it will force you to seek alternatives and
+teach you how to survive even if you are getting hit in combat. My personal favorites were Expert Curse and Defense-oriented heroes (a Black Dragon could only deliver 7 damage at one point).</p>
+<p>There is nothing wrong with a Haste or Prayer cast by a Master Genie I believe.</p>
+<h3 id="blind">Blind</h3>
+<p>An overpowered way to deal with threats. If you are applying this to ranged units, consider Forgetfulness / Expert Curse / Expert Tactics + speed 7 units / High Morale + speed 7 units / Hypnotize. For melee stacks you can abuse the AI and make them run after your fast stack (this one is balanced by neutral&rsquo;s morale though), use an alternative like Basilisks (an exotic way to do it), Quicksand, Teleport, or become better at surviving incoming damage (fake 1-unit stacks, Armorer, Shield / Stone Skin).</p>
+<h3 id="resurrection">Resurrection</h3>
+<p>This is one of the things that provides forgiveness for your mistakes, and makes your appear more strong than you actually are. It is nice to play with it, but it is far better to learn how to receive less damage (Expert Shield, Armorer) or do not depend on an outcome of one battle (having better scouting, more potent and diverse heroes).</p>
+<h3 id="town-portal">Town Portal</h3>
+<p>After you gain an ability to instantly travel between towns, you essentially opt for defending all your castles with one army instead of planning all sieges (and developing more than one hero) and even accepting that sometimes you may lose. It is definitely fun to be that strong, and if you feel this makes your games too easy - try to stay away from this spell (or play Inferno exclusively!).</p>
+<p>It is probably still ok to use it for the nearest town only.</p>
+<h3 id="armageddon">Armageddon</h3>
+<p>This spell is amazing, basically a solution to everything. If after 20 maps cleared with this tactic you feel like you do not want it this way anymore, you can try adding a simple restriction - you can no longer rely on fire immune units.</p>
+<p>As a result, you will find the Resistance skill has much more appeal now, as well as Resistance boosting artifacts and even the Dwarves!</p>
+<p>I have lost a hero that relied on a Horde of Gnoll Marauders to clean the map this way, and it was OK.</p>
+<p>There is also a possibility to cast Advanced Anti-Magic to become immune to Armageddon, which makes it reliably work with any unit and without Resistance. Combined with the rule about the number of magic skills a hero can have, Earth Magic is the one to choose if you want to cast Armageddon!</p>
+<h3 id="offensive-spells">Offensive spells</h3>
+<p>Everyone loves Solmyr / Aislinn / Deemer, and many are probably also tired of them. You may have already noticed that the first thing you do when a combat starts is to open the spell book, searching for that Lightning Bolt.</p>
+<p>Magic is a big part of the game and is something that makes it interesting. If you, however, no longer enjoy destroying foes with high Spell Power, you can try to use your mana to render enemy units powerless (and I do not mean with Expert Slow or Blind, hehe). There is even an original map included with the game called &ldquo;Heroes of Might, Not Magic&rdquo;, where all magic is largely banned, and you have to be good with just your units.</p>
+<p>On the other hand, raising a skeleton army with Death Ripple could very well be worth it. The spell is weaker than the Meteor Shower for instance, but with proper battle planning you can make it work very well in the beginning of the game for example. Destroy Undead can also suddenly become very handy when you need to pass by that Horde of Vampires.</p>
+<p>Or, one of my favorite tricks, is to use the Clone spell on a really big stack and double the damage (and also waste enemy&rsquo;s move to dissolve the clone).</p>
+<p>When threatened by an AI with a greater army, you can try to reduce it with Summon Elemental spells, if you manage to find a scroll. You do not really need to win each battle to overcome your enemies. Since the game has a nice retreat feature (I do not have a problem with heroes appearing in a tavern instantly), you can <del>ab</del>use it to manage the dangers.</p>
+<p>Somewhere in the notes there is also a mention of Blessed Lizard Warriors with Expert Teleport&hellip; you get the idea.</p>
+<p>Sometimes you may wish to actually use the Slow spell, like when fighting Dread Knights. There are some alternatives - Quicksand, Land Mine and Fire Wall to name a few. (In Heroes 4 the Quicksand spell is much more amazing though, check it out!)</p>
+<p>Of course, casting 2 mana Magic Arrows when playing with Magi is still acceptable as the Tower is designed for that.</p>
+<h3 id="one-magic-school-per-hero">One magic school per hero</h3>
+<p>This one is really nice. You are no longer proficient with all the spells in the game with ONE hero. Rather, you develop specialists that can solve certain problems - one hero has enough mana points and uses the Fly spell to take that Pandora Box across the ridge; to fight dragons, you take one with Expert Shield and High Defense; to find these Crystals for the next Mage Guild level you attack Cyclops Stockpile and use Expert Forgetfulness with the third hero, who occasionally casts Expert Frost Ring do defend a castle.</p>
+<p>Also, not everyone may even need Wisdom - for Barbarians Expert Curse / Bloodlust is already enough, and it could be more useful to develop Offense or Pathfinding. Mages on the other hand may appreciate less popular skills like Mysticism or Scholar. The former may allow to always have mana points for a simple spell (given that you always evaluate if you really need to open the spellbook!), even if you are deep in a desert away from Magic Wells or roads. The latter can help share Meteor Shower between all your heroes on week 1* and greatly surprise invaders with hit&rsquo;n&rsquo;run strategy!</p>
+<p>*in perfect circumstances</p>
+<h3 id="no-game-loading">No game loading</h3>
+<p>The save/load feature is essential when you are learning the game. Once you know all the units and what to expect from them on the battlefield, it will be very beneficial if you learn to estimate before battle the damage dealt by your stacks and the enemy. In fact, this is all you need to stop using the load feature!</p>
+<h3 id="neat-tricks">Neat tricks</h3>
+<h4 id="dendroids-and-diplomacy">Dendroids and Diplomacy</h4>
+<p>Dendroids have a very high AI Value / Gold ratio, and by the start of week 2 with Rampart you might be able to obtain 11 of them. Having a cheap &ldquo;strong&rdquo; army on your side will supply quite a lot more joining offers from neutrals.</p>
+<p>Certainly, the Diplomacy skill is the most overpowered in the whole game, and if you have won enough maps thru it, chances are you already have banned it. With the allowed unit level limit this skill becomes less strong, although still strong enough to break the game!</p>
+<h4 id="the-ballista">The Ballista</h4>
+<p>One of the really nice discoveries was the Ballista-powered heroes. Under <strong>perfect</strong> circumstances you very quickly get a Barbarian with 20 attack, Expert Artillery, Archery, Luck, Curse and a really unthreating single stack of creatures (Serpent Flies maybe). This army is not considered very strong by both neutrals and enemy heroes, so a bit of AI abuse ensues. The neutrals would split into many stacks, making each easier to kill with one blow. The Ballista with such a configuration becomes a very potent weapon, delivering 2 shots each dealing ~100 base damage within 10 hexes (do not forget Archery and Attack bonuses). As a result, you can get a very quick explorer with somewhat little investment. The bonus is that this hero can afford to retreat, and you only need to keep your creature stack alive long enough for Ballista to kill everyone.</p>
+<h4 id="curse">Curse</h4>
+<p>When you come across a Horde of Gogs guarding a road, and you relied on the 20 Marksmen all the way, you probably become upset. Luckily, the game gives you a relatively easy way to handle this challenge without too many casualties. Under Expert Curse these Gogs will do at most 1 damage each (50 damage to the other end of the field per round at most) , so you get much better chances of proceeding by the road with 15 Marksmen. Of course, you will learn that the Curse spell itself is pretty rare compared to other level 1 spells, and getting Expert Fire Magic is not something you can count on in every game. Nevertheless, it is one of those things you can pull off under right circumstances, and the fact that it is not guaranteed to happen makes the game so much better.</p>
+<h4 id="shield">Shield</h4>
+<p>With Advanced Earth Magic the spell gives 30% hand-to-hand damage reduction, which is just huge. The use of this spell alone can make you a better field commander as your creatures will die less frequently and you will be able to endure more combats with the same army.</p>
+<h4 id="handicap">Handicap</h4>
+<p>There is also a handicap option available for each player, and it makes the game even more interesting. I play with it all the time now. I do not expect to win every map I play. Instead, I expect a challenge that tests my knowledge of the game and encourages me to be daring and creative.</p>
+<p>You will also find that Estates is an amazing skill and every hero should have it.</p>
+<h4 id="ai-starting-as-conflux">AI starting as Conflux</h4>
+<p>This one often becomes super challenging. The elementals come in huge numbers, have a lot of HP, are accompanied by ridiculous units like Magic Elementals or Phoenixes, and can be unexpectedly immune to common spells to boot. Personally, I always welcome the challenge, but sometimes it can be frustrating. There is always a <strong>New Game</strong> button though!</p>
+<h4 id="another-barkeep-tip">Another barkeep tip</h4>
+<p>&ldquo;Sometimes the best way to avoid defeat is by avoiding combat!&rdquo;</p>
+<p>This is the essence of the game - there is more to winning than just having a strong army. There are tricks that you can try against strong opponents, not all of them are designed to succeed, but you will have fun trying and occasionally finding something interesting.</p>
+<h4 id="mighty-gorgons">Mighty Gorgons</h4>
+<p>20 of them might be enough to conquer a Utopia, and they are only level 5!</p>
+<h4 id="gretchin">Gretchin</h4>
+<p>When you are playing for Citadel, you may want to use the power of Wolf Raiders - they have high Attack, Damage and strike TWICE! The only issue is that they die very fast.</p>
+<p>With Gretchin, the Hobgoblins will have the speed of 8 - the same as Wolf Raiders, and so they can be used to remove the retaliation from enemy stacks WITHOUT having to make Wolf Raiders wait.</p>
+<h4 id="teleport">Teleport</h4>
+<p>If you manage to make Teleport cost 3 mana, you can always make sure your ranged units (or Harpy Hags) are in safety and attack every round.</p>
+<h3 id="finally">Finally</h3>
+<p>To me the randomness is the best part of Heroes 3. I really dislike attempts to make the game predictable, balanced or &ldquo;fair&rdquo; as some people do, especially in tournaments (like removal of morale benefits from randoms, mage guild rebuilds, ban of hit&rsquo;n&rsquo;run, Dimension Door or Resistance skill etc). I always say that Heroes 3 does not need to be turned into chess because it is already a much better game.</p>
+]]></content:encoded></item><item><title>Clone Disk to a Smaller One With Clonezilla</title><link>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</link><pubDate>Sun, 04 Dec 2022 22:47:35 +0000</pubDate><guid>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</guid><description>Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
 In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.
-New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.</description></item><item><title>Jetpack Compose Navigation Handling of Hilt View Model</title><link>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</link><pubDate>Fri, 04 Nov 2022 23:33:47 +0000</pubDate><guid>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</guid><description>Suppose you want to re-use a ViewModel across two full-screen composables, and for some reason you rely on hiltViewModel() from androidx.hilt:hilt-navigation-compose:1.0.0:
+New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_12_04_23_06_57_d03e3ffaa3.png"
+         alt="clonezilla image"/> 
+</figure>
+
+<p>Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.</p>
+<p>In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.</p>
+<p>New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.</p>
+<p>For some reason, it was not possible to create partitions automatically - the creation of the last one would always get out of boundary and fail everything.</p>
+<p>A comment <a href="https://superuser.com/a/1361409">here</a> hints that you can tell Clonezilla to skip partition creation altogether, and create them by hand yourself.</p>
+<p>I ended up skipping D: and the recovery image and restoring only first 4 partitions. This worked well to boot Windows (but without recovery partition it was not possible to go to safe mode etc).</p>
+<p>Now, the most interesting part. I used shell in Clonezilla to create the partitions. With the backup directory mounted, I located a partition table dump made by <code>sfdisk</code>. I have commented out last two partitions, and used <code>sfdisk</code> to restore the remaining 4 with the dump file. It was very handy to have this file there as I really did not want to know where each partition should start and end.</p>
+]]></content:encoded></item><item><title>Jetpack Compose Navigation Handling of Hilt View Model</title><link>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</link><pubDate>Fri, 04 Nov 2022 23:33:47 +0000</pubDate><guid>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</guid><description>Suppose you want to re-use a ViewModel across two full-screen composables, and for some reason you rely on hiltViewModel() from androidx.hilt:hilt-navigation-compose:1.0.0:
 @Composable fun Comp1(viewModel: SharedViewModel = hiltViewModel()) { ... } @Composable fun Comp2(viewModel: SharedViewModel = hiltViewModel()) { ... } Let&amp;rsquo;s imagine Comp1 navigates to Comp2.
-If you do not pass an explicit handle to existing instance of SharedViewModel to these composables, they will go ahead and create a new one for themselves.</description></item><item><title>Knee Deep in Trouble Merle Travis</title><link>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</link><pubDate>Thu, 03 Nov 2022 16:51:43 +0000</pubDate><guid>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</guid><description> (well I&amp;#39;m) kneeeeeeeeeeee deeeeeep in trouble (got the) saaaaaaame thing on my miiiiind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing meeee -- just keep a kiiilling tiiiiime (it&amp;#39;s agi)tating, wading -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come (to) looooung (I&amp;#39;ll be) kneeeeeeeeee eeeeeee deeeeep in trouble -- till my baby comes home (tururu) pa tu bu bruuuu bu pa pu (I&amp;#39;ve had the) mumps, the bumps, (and) all kinda trumps (I&amp;#39;ve had the) groove and the hoop (in) call (I&amp;#39;ve had the) aches, the shakes, -- and everythang it takes --(to) really bump the good man off (but have my) troubles double --looodi, what a muddle --everythang&amp;#39;s getting to beeeeeeeee -- aaaaammm standing knee deep in trouble --since my honey let me beeeee (well amm) kneeeeeee eeeeeee deeeep in trouble (got the) same thing on my maaaaaind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing me --(to) just keep the killing taaaaaaaaim (it&amp;#39;s agi)tating, wading, -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come(to) loooooong (I&amp;#39;ll be) kneeeeeeee eeeeeeee deeeep in trouble -- till my baby comes hoououo-ome -- till my baby comes home comon home, baby -- till my baby comes hooooouume taaaaa aaaa puruppuumm (mm)datt&amp;#39;tee du weeeeee</description></item><item><title>Using Android Xml Layouts With Jetpack Compose</title><link>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</link><pubDate>Thu, 03 Nov 2022 16:51:39 +0000</pubDate><guid>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</guid><description>The documentation suggests to use AndroidViewBinding API for the task.
+If you do not pass an explicit handle to existing instance of SharedViewModel to these composables, they will go ahead and create a new one for themselves.</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_11_04_23_35_16_f654b730eb.png"
+         alt="hilt-logo"/> 
+</figure>
+
+<p>Suppose you want to re-use a ViewModel across two full-screen composables, and for some reason you rely on <code>hiltViewModel()</code> from <code>androidx.hilt:hilt-navigation-compose:1.0.0</code>:</p>
+<pre tabindex="0"><code>@Composable
+fun Comp1(viewModel: SharedViewModel = hiltViewModel()) { ... }
+
+@Composable
+fun Comp2(viewModel: SharedViewModel = hiltViewModel()) { ... }
+</code></pre><p>Let&rsquo;s imagine <code>Comp1</code> navigates to <code>Comp2</code>.</p>
+<p>If you do not pass an explicit handle to existing instance of <code>SharedViewModel</code> to these composables, they will go ahead and create a new one for themselves.</p>
+<p>The reason for that is the implementation of <code>hiltViewModel()</code> internally relies on something called <code>LocalViewModelStoreOwner</code> to determine whether it needs to create a new instance or re-use an old one.</p>
+<p>The most straightforward solution is of course to just pass a predefined ViewModel instance and not rely on <code>hiltViewModel()</code>.</p>
+<p>The second approach is to go along with Google and try to supply correct store owners each time you want to re-use something.</p>
+<p>Now, the problem with the latter is that it sounds like additional and unnecessary manual work. Before Hilt, in Dagger 2, you had an option to simply mark any object (including a ViewModel) with an appropriate scope or <code>@Singleton</code> annotation and just get the correct instance.</p>
+<p>You are not allowed to do that on a <code>@HiltViewModel</code> now for some reason. Probably it has something to do with these <code>Context</code>-tied owners that exist separately from the DI Container.</p>
+<p>There arises one question though - why the heck then <code>hiltViewModel()</code> and <code>@HiltViewModel</code> have <code>Hilt</code> in their names? Why we again have to abandon instance-management by Dagger that helped us overcome Activity and Fragment recreations, and start tracking these owners by hand?</p>
+<p>Funny thing is, configuration changes do not make <code>hiltViewModel()</code> recreate the instances, although the contexts are no longer the same, one would think.</p>
+<p>Anyway, kind folks over at StackOverflow shared a better solution <a href="https://stackoverflow.com/a/69643625/13442292">here</a>.</p>
+]]></content:encoded></item><item><title>Knee Deep in Trouble Merle Travis</title><link>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</link><pubDate>Thu, 03 Nov 2022 16:51:43 +0000</pubDate><guid>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</guid><description> (well I&amp;#39;m) kneeeeeeeeeeee deeeeeep in trouble (got the) saaaaaaame thing on my miiiiind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing meeee -- just keep a kiiilling tiiiiime (it&amp;#39;s agi)tating, wading -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come (to) looooung (I&amp;#39;ll be) kneeeeeeeeee eeeeeee deeeeep in trouble -- till my baby comes home (tururu) pa tu bu bruuuu bu pa pu (I&amp;#39;ve had the) mumps, the bumps, (and) all kinda trumps (I&amp;#39;ve had the) groove and the hoop (in) call (I&amp;#39;ve had the) aches, the shakes, -- and everythang it takes --(to) really bump the good man off (but have my) troubles double --looodi, what a muddle --everythang&amp;#39;s getting to beeeeeeeee -- aaaaammm standing knee deep in trouble --since my honey let me beeeee (well amm) kneeeeeee eeeeeee deeeep in trouble (got the) same thing on my maaaaaind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing me --(to) just keep the killing taaaaaaaaim (it&amp;#39;s agi)tating, wading, -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come(to) loooooong (I&amp;#39;ll be) kneeeeeeee eeeeeeee deeeep in trouble -- till my baby comes hoououo-ome -- till my baby comes home comon home, baby -- till my baby comes hooooouume taaaaa aaaa puruppuumm (mm)datt&amp;#39;tee du weeeeee</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_11_03_16_49_10_050719f434.png"
+         alt="travis smiling"/> 
+</figure>
+
+<pre tabindex="0"><code>(well I&#39;m) kneeeeeeeeeeee
+deeeeeep in trouble
+(got the) saaaaaaame thing on my
+miiiiind
+
+(there&#39;s nothing) thrilling
+(and it&#39;s a) killing meeee
+-- just keep a kiiilling
+tiiiiime
+
+(it&#39;s agi)tating, wading
+-- it&#39;s aggravating
+(and I&#39;m) left nothing come
+(to) looooung
+
+(I&#39;ll be) kneeeeeeeeee
+eeeeeee deeeeep in trouble
+-- till my baby comes
+home
+
+(tururu) pa tu bu bruuuu bu pa pu
+
+(I&#39;ve had the) mumps, the bumps,
+(and) all kinda trumps
+(I&#39;ve had the) groove and the hoop
+(in) call
+
+(I&#39;ve had the) aches, the shakes,
+-- and everythang it takes
+--(to) really bump the good man
+off
+
+(but have my) troubles double
+--looodi, what a muddle
+--everythang&#39;s getting to
+beeeeeeeee
+
+-- aaaaammm standing
+knee deep in trouble
+--since my honey let me
+beeeee
+
+(well amm) kneeeeeee
+eeeeeee deeeep in trouble
+(got the) same thing on my
+maaaaaind
+
+(there&#39;s nothing) thrilling
+(and it&#39;s a) killing me
+--(to) just keep the killing
+taaaaaaaaim
+
+(it&#39;s agi)tating, wading,
+-- it&#39;s aggravating
+(and I&#39;m) left nothing come(to)
+loooooong
+
+(I&#39;ll be) kneeeeeeee
+eeeeeeee deeeep in trouble
+-- till my baby comes
+hoououo-ome
+-- till my baby comes
+home comon home, baby
+-- till my baby comes
+hooooouume taaaaa
+aaaa puruppuumm
+(mm)datt&#39;tee du
+weeeeee
+</code></pre>]]></content:encoded></item><item><title>Using Android Xml Layouts With Jetpack Compose</title><link>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</link><pubDate>Thu, 03 Nov 2022 16:51:39 +0000</pubDate><guid>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</guid><description>The documentation suggests to use AndroidViewBinding API for the task.
 I intended to learn Compose in my project, but also wanted a LineChart from MPAndroidChart library.
 Here is what I did. In the fragment:
 override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? { val lineChart = FragmentChartBinding.inflate(inflater) return ComposeView(requireContext()).apply { setContent { SetContent(viewModel, findNavController(), lineChart) } } } And in the composable:
-@Composable fun setChart( state: State&amp;lt;List&amp;lt;BodyMeasurement.</description></item><item><title>Strapi Gatsby Blog</title><link>http://localhost:1313/posts/strapi-gatsby-blog/</link><pubDate>Wed, 02 Nov 2022 13:13:31 +0000</pubDate><guid>http://localhost:1313/posts/strapi-gatsby-blog/</guid><description>Here is the path I took to host my personal site with Strapi + Gatsby setup.
+@Composable fun setChart( state: State&amp;lt;List&amp;lt;BodyMeasurement.</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_11_03_16_50_26_9e06e66dfc.png"
+         alt="heroes-logo"/> 
+</figure>
+
+<p>The documentation suggests to use AndroidViewBinding API for the task.</p>
+<p>I intended to learn Compose in my project, but also wanted a LineChart from MPAndroidChart library.</p>
+<p>Here is what I did. In the fragment:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onCreateView</span>(
+</span></span><span style="display:flex;"><span>        inflater: LayoutInflater,
+</span></span><span style="display:flex;"><span>        container: ViewGroup?,
+</span></span><span style="display:flex;"><span>        savedInstanceState: Bundle?
+</span></span><span style="display:flex;"><span>    ): View? {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> lineChart = <span style="color:#a6e22e">FragmentChartBinding</span>.inflate(inflater)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ComposeView(requireContext()).apply {
+</span></span><span style="display:flex;"><span>            setContent {
+</span></span><span style="display:flex;"><span>                SetContent(viewModel, findNavController(), lineChart)
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>And in the composable:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#a6e22e">@Composable</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">setChart</span>(
+</span></span><span style="display:flex;"><span>    state: State&lt;List&lt;<span style="color:#a6e22e">BodyMeasurement</span>.OxygenMeasurement&gt;&gt;,
+</span></span><span style="display:flex;"><span>    lineChart: FragmentChartBinding
+</span></span><span style="display:flex;"><span>) = AndroidViewBinding(
+</span></span><span style="display:flex;"><span>    bindingBlock = { _, _, _ <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>        lineChart
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    modifier = Modifier
+</span></span><span style="display:flex;"><span>        .fillMaxSize(),
+</span></span><span style="display:flex;"><span>    update = { refreshChartData(lineChart, state.<span style="color:#66d9ef">value</span>) }
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>The samples that I found on the internet dealt with static views, so I wrote this little note. Enjoy!</p>
+<p>The quoted code is at <a href="https://github.com/pratclot/oxygentracker/blob/7cb153ca429818917f432c6a0a6ba9987a68618e/app/src/main/java/com/pratclot/oxygentracker/fragments/FragmentChart.kt">GitHub</a>.</p>
+]]></content:encoded></item><item><title>Strapi Gatsby Blog</title><link>http://localhost:1313/posts/strapi-gatsby-blog/</link><pubDate>Wed, 02 Nov 2022 13:13:31 +0000</pubDate><guid>http://localhost:1313/posts/strapi-gatsby-blog/</guid><description>Here is the path I took to host my personal site with Strapi + Gatsby setup.
 I had only one previous experience hosting a personal website, that was self hosting with Ghost platform version 3. It was a good one with a very intuitive article creation and editing process.
-I decided to try something else, and then learned there are headless CMS solutions which may work with any static site generator.</description></item><item><title>Limit Network Bandwidth for a Virtual Machine on Linux</title><link>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</link><pubDate>Wed, 02 Nov 2022 11:52:38 +0000</pubDate><guid>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</guid><description>Something very useful - find the name of the virtual NIC on the host, and run a magical tc command:
-# ip l | grep vnet 47: vnet1: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc htb master virbr0 state UNKNOWN mode DEFAULT group default qlen 1000 # tc class change dev vnet1 classid 1:1 root htb rate 100Mbit Here is an example of me using it to choke Steam:</description></item><item><title>Qemu Passthrough for Sm2262 Sm2263 Based Ssd</title><link>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</link><pubDate>Wed, 02 Nov 2022 11:38:56 +0000</pubDate><guid>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</guid><description>I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described here:
-&amp;lt;hostdev mode=&amp;#34;subsystem&amp;#34; type=&amp;#34;pci&amp;#34; managed=&amp;#34;yes&amp;#34;&amp;gt; &amp;lt;source&amp;gt; &amp;lt;address domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x6f&amp;#34; slot=&amp;#34;0x00&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/source&amp;gt; &amp;lt;boot order=&amp;#34;1&amp;#34;/&amp;gt; &amp;lt;alias name=&amp;#34;ua-sm2262&amp;#34;/&amp;gt; &amp;lt;address type=&amp;#34;pci&amp;#34; domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x00&amp;#34; slot=&amp;#34;0x07&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/hostdev&amp;gt; &amp;lt;qemu:commandline&amp;gt; &amp;lt;qemu:arg value=&amp;#34;-set&amp;#34;/&amp;gt; &amp;lt;qemu:arg value=&amp;#34;device.ua-sm2262.x-msix-relocation=bar2&amp;#34;/&amp;gt; &amp;lt;/qemu:commandline&amp;gt; Since some release of qemu it seems to no longer work and give an error message like this:</description></item><item><title>Fingerstyle Tabs</title><link>http://localhost:1313/posts/fingerstyle-tabs/</link><pubDate>Wed, 02 Nov 2022 00:22:10 +0000</pubDate><guid>http://localhost:1313/posts/fingerstyle-tabs/</guid><description>I learnt how to play things on the guitar mostly because of great tabs published at https://frettedinstrumentsnyc.com. For me this was the only way to stay learning, because just doing &amp;ldquo;exercises&amp;rdquo; makes no sense to my brain as there is no music produced that is remotely pleasurable to hear.
-With the tabs you instead can already mimic your favorite tunes - all that is required is some technical work to make your fingers accustomed to the changes in chord shapes.</description></item><item><title>Encrypting Existing Linux Installation</title><link>http://localhost:1313/posts/encrypting-existing-linux-installation/</link><pubDate>Tue, 01 Nov 2022 23:38:50 +0000</pubDate><guid>http://localhost:1313/posts/encrypting-existing-linux-installation/</guid><description>I have an Arch (Gnome) on one physical disk and Ubuntu on another. At some point I decided to encrypt the Ubuntu installation. Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate boot /dev/nvme1n1p2 device to keep grub on, and it had its benefits too. Main bootloader lives on the Arch disk.
-I followed the steps on Arch wiki, but during the boot there was no prompt to put password for decryption.</description></item></channel></rss>
+I decided to try something else, and then learned there are headless CMS solutions which may work with any static site generator.</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_11_02_13_14_20_31889ed3e1.png"
+         alt="strapi site picture"/> 
+</figure>
+
+<p>Here is the path I took to host my personal site with Strapi + Gatsby setup.</p>
+<p>I had only one previous experience hosting a personal website, that was self hosting with <a href="https://ghost.org/">Ghost</a> platform version 3. It was a good one with a very intuitive article creation and editing process.</p>
+<p>I decided to try something else, and then learned there are headless CMS solutions which <em>may</em> work with any static site generator. Compared to Ghost, that would require me to manage 2 systems, plus figure out how to integrate them. I spent a day learning about existing offers (<a href="https://jamstack.org/headless-cms/">this</a> place is helpful), tried a few and quickly realized that the integration step is the main challenge in a split system approach.</p>
+<p>At some point I was able to run a starter from Strapi that was already integrated with Gatsby:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yarn create strapi-starter my-project gatsby-blog
+</span></span></code></pre></div><p><a href="https://strapi.io/blog/build-a-static-blog-with-gatsby-and-strapi">Here</a> is a nice blog post about it also.</p>
+<p>Then I made a docker container to deploy Gastby, you can find it <a href="https://github.com/pratclot/pratclot.com">here</a>.</p>
+<p>The Strapi part required a bit of configuration before it was usable.</p>
+<p>The uploads are stored in a directory local to backend code by default. These files are not going to survive if you decide to run the admin panel in a docker container. Placing them in a docker volume is the next reasonable thought, but it adds complexity to the setup. The ghost platform I used before used the database as a single source of truth by default.</p>
+<p>I tried to integrate <code>strapi-provider-mysql-files</code>  found <a href="https://gitlab.com/themineraria/strapi_mysql_files">here</a>, as there is no official plugin / provider. The provider integration worked as written in README, however, at the time of writing, the code for the plugin was written for Strapi version 3, so I needed to adapt it to version 4. You basically need to generate a new plugin with this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yarn strapi generate
+</span></span></code></pre></div><p>And then add the code from Cyprien&rsquo;s plugin to a middleware (or a controller, or elsewhere), enriched the plugin&rsquo;s config with SQL server parameters (as in v4 it seems you cannot access other plugin&rsquo;s configs), enable that middleware in <code>config/middlewares.js</code> (again, you probably can automate this by utilizing v4&rsquo;s plugin lifecycle API) and it should work.</p>
+<p>After this I decided to use S3 instead. There is official support for it by Strapi, and they <a href="https://strapi.io/blog/how-to-set-up-amazon-s3-upload-provider-plugin-for-our-strapi-app">have</a> a nice blog post about it.</p>
+<p>There is one additional step to make the thumbnails work in the admin panel in this setup. The bucket has to have a certain CORS policy configured:</p>
+<pre tabindex="0"><code>[
+  {
+    &#34;AllowedHeaders&#34;: [&#34;*&#34;],
+    &#34;AllowedMethods&#34;: [&#34;GET&#34;],
+    &#34;AllowedOrigins&#34;: [&#34;YOUR STRAPI URL&#34;],
+    &#34;ExposeHeaders&#34;: [],
+    &#34;MaxAgeSeconds&#34;: 3000
+  }
+]
+</code></pre><p>It is taken from <a href="https://github.com/strapi/strapi/tree/main/packages/providers/upload-aws-s3">here</a>. <code>AllowedOrigins</code> in my case looks like this:</p>
+<pre tabindex="0"><code>[&#34;pratclot.com&#34;,  &#34;localhost:1337&#34;]
+</code></pre><p>In case you need to further develop the project, you may want to enable GraphQL playground. For v4 there is a solution <a href="https://stackoverflow.com/a/73626902/13442292">here</a>, it will look like this:</p>
+<pre tabindex="0"><code>// path: ./config/plugins.js
+
+module.exports = {
+  //
+  graphql: {
+    config: {
+      endpoint: &#39;/graphql&#39;,
+      shadowCRUD: true,
+      playgroundAlways: true, &lt;----- this one
+      depthLimit: 7,
+      amountLimit: 100,
+      apolloServer: {
+        tracing: false,
+        introspection: true, &lt;----- also this for production deployment
+      },
+    },
+  },
+};
+</code></pre><p>Now, the content-types that represent the pages of the site are stored on disk, and there is no way to keep them together with other configurations in the database. This seems like a major turn-down that is not advertised.</p>
+<p>Finally, the deployment. Strapi and Gatsby are located on different machines, so to deploy the site I run this improvisational script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/sh
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>set -e
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>yarn docker:frontend
+</span></span><span style="display:flex;"><span>docker save pratclot.com.frontend -o pratclot.com.frontend.tar
+</span></span><span style="display:flex;"><span>rsync -avz pratclot.com.frontend.tar myvps:~/
+</span></span><span style="display:flex;"><span>ssh myvps <span style="color:#e6db74">&lt;&lt; EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo docker load -i pratclot.com.frontend.tar &amp;&amp;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo docker-compose -f \$(find . -type d -name pratclot.com)/docker-compose.centos.yml down &amp;&amp;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sudo docker-compose -f \$(find . -type d -name pratclot.com)/docker-compose.centos.yml up -d &amp;&amp;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    curl https://pratclot.com --fail -I
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div><p>Basically, the above explains that I am too poor to have a container registry and k8s, so I transfer and run the container by hand :)</p>
+]]></content:encoded></item><item><title>Limit Network Bandwidth for a Virtual Machine on Linux</title><link>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</link><pubDate>Wed, 02 Nov 2022 11:52:38 +0000</pubDate><guid>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</guid><description>Something very useful - find the name of the virtual NIC on the host, and run a magical tc command:
+# ip l | grep vnet 47: vnet1: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc htb master virbr0 state UNKNOWN mode DEFAULT group default qlen 1000 # tc class change dev vnet1 classid 1:1 root htb rate 100Mbit Here is an example of me using it to choke Steam:</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_11_02_11_51_58_49f1f7aeb7.png"
+         alt="linux terminal snippet"/> 
+</figure>
+
+<p>Something very useful - find the name of the virtual NIC on the host, and run a magical tc command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># ip l | grep vnet</span>
+</span></span><span style="display:flex;"><span>47: vnet1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span style="color:#ae81ff">1500</span> qdisc htb master virbr0 state UNKNOWN mode DEFAULT group default qlen <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># tc class change dev vnet1 classid 1:1 root htb rate 100Mbit</span>
+</span></span></code></pre></div><p>Here is an example of me using it to choke Steam:</p>
+<p></p>
+]]></content:encoded></item><item><title>Qemu Passthrough for Sm2262 Sm2263 Based Ssd</title><link>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</link><pubDate>Wed, 02 Nov 2022 11:38:56 +0000</pubDate><guid>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</guid><description>I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described here:
+&amp;lt;hostdev mode=&amp;#34;subsystem&amp;#34; type=&amp;#34;pci&amp;#34; managed=&amp;#34;yes&amp;#34;&amp;gt; &amp;lt;source&amp;gt; &amp;lt;address domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x6f&amp;#34; slot=&amp;#34;0x00&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/source&amp;gt; &amp;lt;boot order=&amp;#34;1&amp;#34;/&amp;gt; &amp;lt;alias name=&amp;#34;ua-sm2262&amp;#34;/&amp;gt; &amp;lt;address type=&amp;#34;pci&amp;#34; domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x00&amp;#34; slot=&amp;#34;0x07&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/hostdev&amp;gt; &amp;lt;qemu:commandline&amp;gt; &amp;lt;qemu:arg value=&amp;#34;-set&amp;#34;/&amp;gt; &amp;lt;qemu:arg value=&amp;#34;device.ua-sm2262.x-msix-relocation=bar2&amp;#34;/&amp;gt; &amp;lt;/qemu:commandline&amp;gt; Since some release of qemu it seems to no longer work and give an error message like this:</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_11_02_11_39_11_87acee04fb.png"
+         alt="picture of the error in Gnome interface"/> 
+</figure>
+
+<p>I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described <a href="https://bugzilla.kernel.org/show_bug.cgi?id=202055#c42">here</a>:</p>
+<pre tabindex="0"><code>&lt;hostdev mode=&#34;subsystem&#34; type=&#34;pci&#34; managed=&#34;yes&#34;&gt;
+  &lt;source&gt;
+    &lt;address domain=&#34;0x0000&#34; bus=&#34;0x6f&#34; slot=&#34;0x00&#34; function=&#34;0x0&#34;/&gt;
+  &lt;/source&gt;
+  &lt;boot order=&#34;1&#34;/&gt;
+  &lt;alias name=&#34;ua-sm2262&#34;/&gt;
+  &lt;address type=&#34;pci&#34; domain=&#34;0x0000&#34; bus=&#34;0x00&#34; slot=&#34;0x07&#34; function=&#34;0x0&#34;/&gt;
+&lt;/hostdev&gt;
+</code></pre><pre tabindex="0"><code>  &lt;qemu:commandline&gt;
+    &lt;qemu:arg value=&#34;-set&#34;/&gt;
+    &lt;qemu:arg value=&#34;device.ua-sm2262.x-msix-relocation=bar2&#34;/&gt;
+  &lt;/qemu:commandline&gt;
+</code></pre><p>Since some release of qemu it seems to no longer work and give an error message like this:</p>
+<pre tabindex="0"><code>Error starting domain: internal error: process exited while connecting to monitor: qemu-system-x86_64: -set device.ua-sm2262.x-msix-relocation=bar2: there is no device &#34;ua-sm2262&#34; defined
+</code></pre><p>Turns out the syntax has changed, and the solution is posted <a href="https://bbs.archlinux.org/viewtopic.php?id=276409">here</a>. Now I have it working with this:</p>
+<pre tabindex="0"><code>  &lt;qemu:override&gt;
+    &lt;qemu:device alias=&#34;ua-sm2262&#34;&gt;
+      &lt;qemu:frontend&gt;
+        &lt;qemu:property name=&#34;x-msix-relocation&#34; type=&#34;string&#34; value=&#34;bar2&#34;/&gt;
+      &lt;/qemu:frontend&gt;
+    &lt;/qemu:device&gt;
+  &lt;/qemu:override&gt;
+</code></pre>]]></content:encoded></item><item><title>Fingerstyle Tabs</title><link>http://localhost:1313/posts/fingerstyle-tabs/</link><pubDate>Wed, 02 Nov 2022 00:22:10 +0000</pubDate><guid>http://localhost:1313/posts/fingerstyle-tabs/</guid><description>I learnt how to play things on the guitar mostly because of great tabs published at https://frettedinstrumentsnyc.com. For me this was the only way to stay learning, because just doing &amp;ldquo;exercises&amp;rdquo; makes no sense to my brain as there is no music produced that is remotely pleasurable to hear.
+With the tabs you instead can already mimic your favorite tunes - all that is required is some technical work to make your fingers accustomed to the changes in chord shapes.</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/photo_2022_11_02_00_19_59_36945e4e21.jpg"
+         alt="heroes-logo"/> 
+</figure>
+
+<p>I learnt how to play things on the guitar mostly because of great tabs published at <a href="https://frettedinstrumentsnyc.com">https://frettedinstrumentsnyc.com</a>. For me this was the only way to stay learning, because just doing &ldquo;exercises&rdquo; makes no sense to my brain as there is no music produced that is remotely pleasurable to hear.</p>
+<p>With the tabs you instead can already mimic your favorite tunes - all that is required is some technical work to make your fingers accustomed to the changes in chord shapes.</p>
+<p>Because of this exposure to masterfully done tabs, after some years I found I can also put down some tunes which I learned by ear (and eyes). Below is the list of these horrible experiments so far:</p>
+<table>
+<thead>
+<tr>
+<th>Original Performer</th>
+<th>Tune</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bruce Keener</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Son.pdf">Son</a></td>
+</tr>
+<tr>
+<td>Chet Atkins</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/The_House_In_New_Orleans.pdf">The House In New Orleans</a></td>
+</tr>
+<tr>
+<td>Chet Atkins</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Zing_Went_The_Strings_of_My_Heart.pdf">Zing Went The Strings of My Heart</a></td>
+</tr>
+<tr>
+<td>Chet Atkins</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Chet's_tune.pdf">Chet&rsquo;s Tune</a></td>
+</tr>
+<tr>
+<td>Chet Atkins</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Humoresque_Swanee_River.pdf">Humoresque / Swanee River</a></td>
+</tr>
+<tr>
+<td>Odell Martin</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Hello_Dolly.pdf">Hello Dolly</a></td>
+</tr>
+<tr>
+<td>Jerry Reed</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Another_Puff.pdf">Another Puff</a></td>
+</tr>
+<tr>
+<td>Chet and Jerry</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/I'll_Say_She_Does.pdf">I&rsquo;ll Say She Does</a></td>
+</tr>
+<tr>
+<td>Larry Odham</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Wrap%20Your%20Troubles%20In%20Dreams.pdf">Wrap Your Troubles In Dreams</a></td>
+</tr>
+<tr>
+<td>Hank Garland</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Sugarfoot_Rag.pdf">Sugarfoot Rag</a></td>
+</tr>
+<tr>
+<td>Arthur Smith &amp; Chet</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Sweet_Georgia_Brown.pdf">Sweet Georgia Brown</a></td>
+</tr>
+<tr>
+<td>Chet Atkins</td>
+<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Man_of_Mystery.pdf">Man of Mystery</a></td>
+</tr>
+</tbody>
+</table>
+<p>I create the tabs with MuseScore3 since I like Linux more. I use GitHub to store them, so don&rsquo;t hesitate to correct me via issues!</p>
+<p>There are also many places where I found the inspiration to continue learning (with eyes and an unhealthy dose of rewinding):</p>
+<table>
+<thead>
+<tr>
+<th>Who</th>
+<th>Where</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Larry Odham</td>
+<td><a href="https://www.youtube.com/c/LarryOdham">YouTube</a></td>
+<td>The most faithful Chet playing I have seen anywhere. There is a ton of highest quality original material too!</td>
+</tr>
+<tr>
+<td>Larisa Delisser</td>
+<td><a href="https://www.youtube.com/channel/UC0KgPQ70JHXC4hsYk3IHjvQ">YouTube</a></td>
+<td>Richard Smith plays Chet and Jerry tunes note-to-note live!</td>
+</tr>
+<tr>
+<td>Dow</td>
+<td><a href="https://www.youtube.com/user/texican65">YouTube</a></td>
+<td>Proper Jerry Reed spirit demonstration and cool lessons!</td>
+</tr>
+<tr>
+<td>Phil Hunt</td>
+<td><a href="https://www.youtube.com/user/muzikman74">YouTube</a></td>
+<td>Excellent Jerry Reed instructions. You can also get drawn into <a href="https://www.youtube.com/channel/UCn61rDqQqA-EoZNdsMQwmuQ">Eddie&rsquo;s channel</a> from there.</td>
+</tr>
+<tr>
+<td>Jonathan Stout</td>
+<td><a href="https://www.youtube.com/user/campusfive">YouTube</a></td>
+<td>A breath of fresh air when you have a Chet-crisis!</td>
+</tr>
+<tr>
+<td>Gombak Hillbillies</td>
+<td><a href="https://www.youtube.com/user/gombakhillbillies">YouTube</a></td>
+<td>Here&rsquo;s an example of what real talent looks like.</td>
+</tr>
+<tr>
+<td>The Real Merle Travis Guitar</td>
+<td>Whereever you can get it</td>
+<td>Thom Bresh explains what Travis Picking is really.</td>
+</tr>
+<tr>
+<td>g0g0g0rilla</td>
+<td><a href="https://www.youtube.com/user/punkrock1192">YouTube</a></td>
+<td>A dedicated fingerstyle fan with a lot of originals. Just look at &ldquo;The Claw&rdquo; to get my idea of &ldquo;dedicated&rdquo;.</td>
+</tr>
+<tr>
+<td>Francois Ledouc</td>
+<td><a href="https://www.youtube.com/c/Fran%C3%A7oisLeduc">YouTube</a></td>
+<td>Perfect tabs, not only fingerstyle.</td>
+</tr>
+<tr>
+<td>Valentin Voyer</td>
+<td><a href="https://www.youtube.com/c/ValentinVoyerTranscriptionsLibrary">YouTube</a></td>
+<td>Again, perfect transcriptions.</td>
+</tr>
+<tr>
+<td>Craig Dobbins</td>
+<td><a href="http://www.craigdobbins.com/instruction.html">http://www.craigdobbins.com/</a></td>
+<td>Get everything you can.</td>
+</tr>
+<tr>
+<td>James Shannon</td>
+<td><a href="https://www.youtube.com/user/MrShazzar">YouTube</a></td>
+<td>Check out Postman Pat!</td>
+</tr>
+<tr>
+<td>Leon Grizzard</td>
+<td><a href="https://www.youtube.com/user/ljgaustin">YouTube</a></td>
+<td>How to play Western Swing, this is totally needed to play rhythm guitar in a non-boring way.</td>
+</tr>
+</tbody>
+</table>
+]]></content:encoded></item><item><title>Encrypting Existing Linux Installation</title><link>http://localhost:1313/posts/encrypting-existing-linux-installation/</link><pubDate>Tue, 01 Nov 2022 23:38:50 +0000</pubDate><guid>http://localhost:1313/posts/encrypting-existing-linux-installation/</guid><description>I have an Arch (Gnome) on one physical disk and Ubuntu on another. At some point I decided to encrypt the Ubuntu installation. Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate boot /dev/nvme1n1p2 device to keep grub on, and it had its benefits too. Main bootloader lives on the Arch disk.
+I followed the steps on Arch wiki, but during the boot there was no prompt to put password for decryption.</description><content:encoded><![CDATA[<figure class="center">
+    <img loading="lazy" src="./images/Screenshot_from_2022_11_03_15_02_35_d5756d2021.png"
+         alt="picture of Ubuntu asking for a password to decrypt root disk"/> 
+</figure>
+
+<p>I have an Arch (Gnome) on one physical disk and Ubuntu on another. At some point I decided to encrypt the Ubuntu installation.
+Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate boot /dev/nvme1n1p2 device to keep grub on, and it had its benefits too. Main bootloader lives on the Arch disk.</p>
+<p>I followed the steps on Arch wiki, but during the boot there was no prompt to put password for decryption.</p>
+<p>Ubuntu uses initramfs, Arch has mkinitcpio, I could not follow the HOOKS part on the wiki. I will describe what worked on Ubuntu.</p>
+<ul>
+<li>I used Arch to mount the encrypted /dev/nvme1n1p1 device, in Gnome you can use the friendly Disks tool. Notice there are two UUIDs here - for the LUKS container and the actual rootfs. We will need the LUKS one, the second one is used inside /etc/fstab, which is read after the boot and is not related to the decrypting steps here:</li>
+</ul>
+<p></p>
+<ul>
+<li>then as root in the terminal run arch-chroot on the mountpoint of the Ubuntu installation (if you are not on Arch, you will need to mount dev, proc and all that manually). I had to also perform PATH setting for some reason:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
+</span></span></code></pre></div><ul>
+<li>since the boot partition is separate from rootfs (I chose to not encrypt it), also mount it:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@msi:/# mount /dev/nvme1n1p2 /boot
+</span></span></code></pre></div><ul>
+<li>Ubuntu provides update-initramfs script which will gather information from /etc/crypttab and /etc/fstab to be able to find your rootfs at boot. So you only have to put correct entries there:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@msi:/# cat /etc/crypttab 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &lt;target name&gt;	&lt;source device&gt;		&lt;key file&gt;	&lt;options&gt;</span>
+</span></span><span style="display:flex;"><span>cryptroot UUID<span style="color:#f92672">=</span>97ee223b-4db7-4bf4-a9a2-0e5a2c64861f none luks
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>root@msi:/# cat /etc/fstab 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /etc/fstab: static file system information.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use &#39;blkid&#39; to print the universally unique identifier for a</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># device; this may be used with UUID= as a more robust way to name devices</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># that works even if disks are added and removed. See fstab(5).</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;       &lt;dump&gt;  &lt;pass&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># / was on /dev/nvme0n1p1 during installation</span>
+</span></span><span style="display:flex;"><span>UUID<span style="color:#f92672">=</span>4756df54-5536-4001-bc12-046572ed6bd1 /               ext4    errors<span style="color:#f92672">=</span>remount-ro <span style="color:#ae81ff">0</span>       <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>/swapfile                                 none            swap    sw              <span style="color:#ae81ff">0</span>       <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>/dev/disk/by-uuid/bf2e4087-13be-4453-aea1-24b33b54b64a /boot auto nosuid,nodev,nofail,x-gvfs-show <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><ul>
+<li>(optional) I also changed /etc/cryptsetup-initramfs/conf-hook, but probably that was not required:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@msi:/# grep CRYPTSETUP /etc/cryptsetup-initramfs/conf-hook
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># CRYPTSETUP: [ y | n ]</span>
+</span></span><span style="display:flex;"><span>CRYPTSETUP<span style="color:#f92672">=</span>y
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Setting KEYFILE_PATTERN to a non-empty value implies &#34;CRYPTSETUP=y&#34;.</span>
+</span></span></code></pre></div><ul>
+<li>generate initramfs for the current kernel:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@msi:/# update-initramfs -u
+</span></span></code></pre></div><ul>
+<li>now tell grub about that cryptroot entry (you can change the name if you do not like it):</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@msi:/# grep GRUB_CMDLINE_LINUX /etc/default/grub
+</span></span><span style="display:flex;"><span>GRUB_CMDLINE_LINUX_DEFAULT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;quiet splash nvidia-drm.modeset=1 bluetooth.disable_ertm=1&#34;</span>
+</span></span><span style="display:flex;"><span>GRUB_CMDLINE_LINUX<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cryptdevice=UUID=97ee223b-4db7-4bf4-a9a2-0e5a2c64861f:cryptroot root=/dev/mapper/cryptroot&#34;</span>
+</span></span></code></pre></div><ul>
+<li>update grub:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@msi:/# update-grub
+</span></span></code></pre></div><ul>
+<li>done</li>
+</ul>
+<h3 id="helpful-tips">Helpful tips</h3>
+<p>I used a virtual machine on Arch to test Ubuntu installation ( Virtual Machine Manager is quite helpful). I used PCI passthrough to have the whole physical disk there. It is extremely handy to have that environment and I highly recommend doing that at all times (even on Windows with Hyper-V).</p>
+<p>This way I was also able to test the second grub installation. Now even if Arch boot device dies, I still can go (hopefully) to Ubuntu because it has a separate boot partition. You can chain Arch&rsquo;s grub to Ubuntu&rsquo;s one like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>       insmod chain
+</span></span><span style="display:flex;"><span>       search --no-floppy --fs-uuid --set<span style="color:#f92672">=</span>root bf2e4087-13be-4453-aea1-24b33b54b64a
+</span></span><span style="display:flex;"><span>       configfile /grub/grub.cfg
+</span></span></code></pre></div><p>These are the directives for the grub config file, UUID is that of /dev/nvme1n1p2, where my second grub lives.</p>
+<p>I used Grub Customizer on Arch to add another boot entry to its grub:</p>
+<p></p>
+<p>When grub loads misconfigured initramfs you drop into shell:</p>
+<p>-picture of shell-</p>
+<p>Sometimes it says what&rsquo;s up, sometimes not. If you type exit it will try to boot again and will hopefully show the error. In my case it could not find /dev/mapper/cryptroot that was declared as root by grub.</p>
+<p>You can try to figure out what happens in initramfs to get you to your rootfs. I understood that it probably is not overly complicated. There is switch_root tool that is likely used at the very end of all when the rootfs is mounted and accessible. The device decryption happens with cryptsetup luksOpen. So once I ended up in the shell I ran this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cryptsetup luksOpen /dev/nvme0n1p1 cryptroot
+</span></span><span style="display:flex;"><span>exit
+</span></span></code></pre></div><p>And it immediately booted Ubuntu. Note that cryptsetup was not available until update-initramfs was able to see proper /etc/crypttab (or something similar that it relies on). I guess the equivalent configuration on Arch is done by mkinitcpio&rsquo;s HOOKS section.</p>
+]]></content:encoded></item></channel></rss>
