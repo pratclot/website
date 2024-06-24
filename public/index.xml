@@ -1,6 +1,243 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Orange Days</title><link>http://localhost:1313/</link><description>Recent content on Orange Days</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 09 Mar 2024 22:01:22 +0100</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>IP Camera Mail Relay</title><link>http://localhost:1313/posts/ip-camera-mail-relay/</link><pubDate>Sat, 09 Mar 2024 22:01:22 +0100</pubDate><guid>http://localhost:1313/posts/ip-camera-mail-relay/</guid><description>I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.
-There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.</description><content:encoded>&lt;p>I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.&lt;/p>
-&lt;p>There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.&lt;/p></content:encoded></item><item><title>Homelab</title><link>http://localhost:1313/posts/homelab/</link><pubDate>Fri, 08 Mar 2024 18:01:38 +0100</pubDate><guid>http://localhost:1313/posts/homelab/</guid><description>Preface I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &amp;ldquo;migration&amp;rdquo;.</description><content:encoded><![CDATA[<h1 id="preface">Preface</h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Orange Days</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Orange Days</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Jun 2024 09:40:52 +0200</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using VSCode</title>
+      <link>http://localhost:1313/posts/using-vscode/</link>
+      <pubDate>Mon, 24 Jun 2024 09:40:52 +0200</pubDate>
+      
+      <guid>http://localhost:1313/posts/using-vscode/</guid>
+      <description>Here are some actions and their shortcuts that will make you effective with VSCode.
+action shortcut notes search symbols ctrl + shift + o shows a searchable document structure, super handy for yaml or other long files navigation go to one of previous files ctrl + tab hold ctrl to observe a list of those find file by name ctrl + p makes it easy to navigate between files search any action ctrl + shift + p use this if you want to do something, but to not know a shortcut yet, or do not care to learn one open settings ctrl + , add a new line after current one ctrl + enter reformat document ctrl + shift + i there is nothing more daunting than formatting files by hand, this is not needed at all when you have &amp;ldquo;standard&amp;rdquo; formatting conventions.</description>
+      <content:encoded><![CDATA[<p>Here are some actions and their shortcuts that will make you effective with VSCode.</p>
+<table>
+<thead>
+<tr>
+<th>action</th>
+<th>shortcut</th>
+<th>notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search symbols</td>
+<td>ctrl + shift + o</td>
+<td>shows a searchable document structure, super handy for <code>yaml</code> or other long files navigation</td>
+</tr>
+<tr>
+<td>go to one of previous files</td>
+<td>ctrl + tab</td>
+<td>hold <code>ctrl</code> to observe a list of those</td>
+</tr>
+<tr>
+<td>find file by name</td>
+<td>ctrl + p</td>
+<td>makes it easy to navigate between files</td>
+</tr>
+<tr>
+<td>search any action</td>
+<td>ctrl + shift + p</td>
+<td>use this if you want to do something, but to not know a shortcut yet, or do not care to learn one</td>
+</tr>
+<tr>
+<td>open settings</td>
+<td>ctrl + ,</td>
+<td></td>
+</tr>
+<tr>
+<td>add a new line after current one</td>
+<td>ctrl + enter</td>
+<td></td>
+</tr>
+<tr>
+<td>reformat document</td>
+<td>ctrl + shift + i</td>
+<td>there is nothing more daunting than formatting files by hand, this is not needed at all when you have &ldquo;standard&rdquo; formatting conventions. This shortcut will make you happy and productive. <code>esbenp.prettier-vscode</code> helped me to structure this table without going insane</td>
+</tr>
+<tr>
+<td>open preview for a markdown file</td>
+<td>ctrl + shift + v</td>
+<td>it helps a lot to see a rendered file</td>
+</tr>
+<tr>
+<td>&ldquo;close&rdquo; file</td>
+<td>ctrl + w</td>
+<td>this one feels natural for a browser user, but can be very unpleasant if you also like to use this key combo to delete a word, like you can do in <code>bash</code></td>
+</tr>
+<tr>
+<td>delete current line</td>
+<td>ctrl + shift + k</td>
+<td>this is fastest way to delete a line, do not underestimate it</td>
+</tr>
+<tr>
+<td>enable word wrapping</td>
+<td>alt + z</td>
+<td>very useful when you have lengthy lines, it removes the need to scroll horizontally to read them . This can also be enabled globally, search for &ldquo;Word Wrap&rdquo;</td>
+</tr>
+<tr>
+<td>show keybindings</td>
+<td>ctrl + k, ctrl + s</td>
+<td>allows to change some shortcuts if you like IDEA ones for example (like go back and forward)</td>
+</tr>
+<tr>
+<td>open extensions</td>
+<td>ctrl + shift + x</td>
+<td>a quick way to install more productivity helpers</td>
+</tr>
+<tr>
+<td>show project files</td>
+<td>ctrl + shift + e</td>
+<td>it also helps to enable &ldquo;Auto Reveal&rdquo; setting if you feel more comfortable knowing where you are in the workspace now</td>
+</tr>
+<tr>
+<td>toggle left bar</td>
+<td>ctrl + b</td>
+<td></td>
+</tr>
+<tr>
+<td>delete word</td>
+<td>ctrl + backspace</td>
+<td>it is better than holding backspace</td>
+</tr>
+<tr>
+<td>open terminal</td>
+<td>ctrl + `</td>
+<td>this one really sucks on Mac</td>
+</tr>
+<tr>
+<td>add cursor</td>
+<td>alt + click</td>
+<td>allows you to edit text in multiple places at once, do not forget to use this</td>
+</tr>
+<tr>
+<td>rectangular selection</td>
+<td>alt + shift + click</td>
+<td>useful to know that something like this exists</td>
+</tr>
+<tr>
+<td>comment current line</td>
+<td>ctrl + /</td>
+<td>IDEA also moves to the next line after commenting, which I find to be a superior implementation</td>
+</tr>
+<tr>
+<td>show suggestions</td>
+<td>ctrl + space</td>
+<td>this is one of the best features of any text editor or IDE</td>
+</tr>
+<tr>
+<td>open new window</td>
+<td>ctrl + shift + n</td>
+<td>may be needed when you are working with multiple unrelated directories</td>
+</tr>
+<tr>
+<td>move line up</td>
+<td>alt + up</td>
+<td></td>
+</tr>
+<tr>
+<td>show quick fixes</td>
+<td>ctrl + .</td>
+<td></td>
+</tr>
+<tr>
+<td>go to next error</td>
+<td>f8</td>
+<td>this one is better in IDEA (f2), but I can live with that</td>
+</tr>
+<tr>
+<td>rename symbol or file</td>
+<td>f2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>I like very much the shortcuts in IDEA on a Mac, mainly because it is way easier to press <code>cmd</code> button than <code>ctrl + shift</code> (IDEA&rsquo;s Linux and Windows keymap blows, and I am wondering if I should also use <code>alt</code> on Linux instead of <code>ctrl</code>. I did this for Android Studio and could not have been happier). On the other hand, I do not like customizing things too much because it will make me dependent on a certain environment, and will surely render me unproductive outside of it. It was not easy to shift from Android Studio to VSCode for me, but I am happy that I did not try to overwrite all of the shortcuts and instead learned the standard ones in VSCode. There are a few that are ridiculously better in IDEA on a Mac though, here are the important ones that I use all the time:</p>
+<table>
+<thead>
+<tr>
+<th>action</th>
+<th>shortcut</th>
+<th>notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show signature / parameter hints</td>
+<td>alt + p</td>
+<td>I use a custom shortcut that matches what I would <em>physically</em> press in IDEA</td>
+</tr>
+<tr>
+<td>go forward</td>
+<td>alt + ]</td>
+<td></td>
+</tr>
+<tr>
+<td>go back</td>
+<td>alt + [</td>
+<td></td>
+</tr>
+<tr>
+<td>duplicate line</td>
+<td>alt + d</td>
+<td>this one is super good because it does not require you to overwrite your clipboard. Speaking of clipboards, <code>CopyQ</code> is an excellent free tool that will serve as a backup for you memory, please include something like this in your arsenal</td>
+</tr>
+</tbody>
+</table>
+<p>Then there are a few super shortcuts that I like from default <code>bash</code> configuration. Those come from <code>emacs</code> actually, but I never it used, lol. You can configure this at OS-level on a Mac and Linux (they are handy in a browser too), in my case I had to overwrite those shortcuts in VSCode.</p>
+<table>
+<thead>
+<tr>
+<th>action</th>
+<th>shortcut</th>
+<th>notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>go line end</td>
+<td>ctrl + e</td>
+<td></td>
+</tr>
+<tr>
+<td>go line start</td>
+<td>ctrl + a</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>A useful feature built into IDEA is bookmarks. It allows you to select certain places in a few of files you are currently working with, and quickly move between them. I use <code>alefragnani.Bookmarks</code> to have a similar functionality.</p>
+<p>Another helpful OS-level thing is to increase &ldquo;key repeat&rdquo; speed (and also decrease delay for it). You will anyway use arrows to navigate horizontally at some point, so why not make it faster and less annoying?</p>
+<p>Lastly, if you are writing a lot of readable text it is handy to have at least a spellchecker. I use <code>ban.spellright</code> as it claims to do everything offline. It does not check if your sentences are constructed properly though, another extension could probably help with that.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>IP Camera Mail Relay</title>
+      <link>http://localhost:1313/posts/ip-camera-mail-relay/</link>
+      <pubDate>Sat, 09 Mar 2024 22:01:22 +0100</pubDate>
+      
+      <guid>http://localhost:1313/posts/ip-camera-mail-relay/</guid>
+      <description>I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.
+There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.</description>
+      <content:encoded><![CDATA[<p>I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.</p>
+<p>There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Homelab</title>
+      <link>http://localhost:1313/posts/homelab/</link>
+      <pubDate>Fri, 08 Mar 2024 18:01:38 +0100</pubDate>
+      
+      <guid>http://localhost:1313/posts/homelab/</guid>
+      <description>Preface I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &amp;ldquo;migration&amp;rdquo;.</description>
+      <content:encoded><![CDATA[<h1 id="preface">Preface</h1>
 <p>I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &ldquo;migration&rdquo;.</p>
 <p>I worked as a &ldquo;DevOps&rdquo; guy at the time and was excited about all the tech. I used this VPS to run Gitlab, PowerDNS, Rocket.Chat, Jira, LDAP and a host of other things, all just to allow me to experiment with a &ldquo;live&rdquo; server.</p>
 <p>Then I received an email from Contabo where they explain that &ldquo;the effort required to perform repeated know-your-customer checks has reached such a point where it is no longer feasible for us to provide you with further services&rdquo;. Probably has to do with me being a Russian of course.</p>
@@ -129,8 +366,18 @@ calico-node-9zdjn                          1/1     Running   7 (42h ago)        
 calico-node-dv92q                          1/1     Running   7 (42h ago)        17d
 calico-node-jxk47                          1/1     Running   7 (42h ago)        17d
 calico-node-q4jkn                          1/1     Running   3037 (5m38s ago)   17d
-</code></pre>]]></content:encoded></item><item><title>Heroes 3 tricks to extract more joy from the game</title><link>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</link><pubDate>Mon, 12 Dec 2022 21:00:43 +0000</pubDate><guid>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</guid><description>I love to play random maps in Heroes 3 (original complete edition with the amazing HD Launcher) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.
-I remember coming across someone else&amp;rsquo;s saved games on our hostel&amp;rsquo;s LAN during my university days.</description><content:encoded><![CDATA[<figure class="center">
+</code></pre>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Heroes 3 tricks to extract more joy from the game</title>
+      <link>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</link>
+      <pubDate>Mon, 12 Dec 2022 21:00:43 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</guid>
+      <description>I love to play random maps in Heroes 3 (original complete edition with the amazing HD Launcher) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.
+I remember coming across someone else&amp;rsquo;s saved games on our hostel&amp;rsquo;s LAN during my university days.</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_12_12_21_00_20_373890e61e.png"
          alt="heroes-logo"/> 
 </figure>
@@ -215,9 +462,19 @@ teach you how to survive even if you are getting hit in combat. My personal favo
 <p>If you manage to make Teleport cost 3 mana, you can always make sure your ranged units (or Harpy Hags) are in safety and attack every round.</p>
 <h3 id="finally">Finally</h3>
 <p>To me the randomness is the best part of Heroes 3. I really dislike attempts to make the game predictable, balanced or &ldquo;fair&rdquo; as some people do, especially in tournaments (like removal of morale benefits from randoms, mage guild rebuilds, ban of hit&rsquo;n&rsquo;run, Dimension Door or Resistance skill etc). I always say that Heroes 3 does not need to be turned into chess because it is already a much better game.</p>
-]]></content:encoded></item><item><title>Clone Disk to a Smaller One With Clonezilla</title><link>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</link><pubDate>Sun, 04 Dec 2022 22:47:35 +0000</pubDate><guid>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</guid><description>Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Clone Disk to a Smaller One With Clonezilla</title>
+      <link>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</link>
+      <pubDate>Sun, 04 Dec 2022 22:47:35 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</guid>
+      <description>Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
 In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.
-New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.</description><content:encoded><![CDATA[<figure class="center">
+New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_12_04_23_06_57_d03e3ffaa3.png"
          alt="clonezilla image"/> 
 </figure>
@@ -229,9 +486,19 @@ New SSD was only 240 GB, but as it turned out the partition backup made by Clone
 <p>A comment <a href="https://superuser.com/a/1361409">here</a> hints that you can tell Clonezilla to skip partition creation altogether, and create them by hand yourself.</p>
 <p>I ended up skipping D: and the recovery image and restoring only first 4 partitions. This worked well to boot Windows (but without recovery partition it was not possible to go to safe mode etc).</p>
 <p>Now, the most interesting part. I used shell in Clonezilla to create the partitions. With the backup directory mounted, I located a partition table dump made by <code>sfdisk</code>. I have commented out last two partitions, and used <code>sfdisk</code> to restore the remaining 4 with the dump file. It was very handy to have this file there as I really did not want to know where each partition should start and end.</p>
-]]></content:encoded></item><item><title>Jetpack Compose Navigation Handling of Hilt View Model</title><link>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</link><pubDate>Fri, 04 Nov 2022 23:33:47 +0000</pubDate><guid>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</guid><description>Suppose you want to re-use a ViewModel across two full-screen composables, and for some reason you rely on hiltViewModel() from androidx.hilt:hilt-navigation-compose:1.0.0:
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Jetpack Compose Navigation Handling of Hilt View Model</title>
+      <link>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</link>
+      <pubDate>Fri, 04 Nov 2022 23:33:47 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</guid>
+      <description>Suppose you want to re-use a ViewModel across two full-screen composables, and for some reason you rely on hiltViewModel() from androidx.hilt:hilt-navigation-compose:1.0.0:
 @Composable fun Comp1(viewModel: SharedViewModel = hiltViewModel()) { ... } @Composable fun Comp2(viewModel: SharedViewModel = hiltViewModel()) { ... } Let&amp;rsquo;s imagine Comp1 navigates to Comp2.
-If you do not pass an explicit handle to existing instance of SharedViewModel to these composables, they will go ahead and create a new one for themselves.</description><content:encoded><![CDATA[<figure class="center">
+If you do not pass an explicit handle to existing instance of SharedViewModel to these composables, they will go ahead and create a new one for themselves.</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_04_23_35_16_f654b730eb.png"
          alt="hilt-logo"/> 
 </figure>
@@ -252,7 +519,17 @@ fun Comp2(viewModel: SharedViewModel = hiltViewModel()) { ... }
 <p>There arises one question though - why the heck then <code>hiltViewModel()</code> and <code>@HiltViewModel</code> have <code>Hilt</code> in their names? Why we again have to abandon instance-management by Dagger that helped us overcome Activity and Fragment recreations, and start tracking these owners by hand?</p>
 <p>Funny thing is, configuration changes do not make <code>hiltViewModel()</code> recreate the instances, although the contexts are no longer the same, one would think.</p>
 <p>Anyway, kind folks over at StackOverflow shared a better solution <a href="https://stackoverflow.com/a/69643625/13442292">here</a>.</p>
-]]></content:encoded></item><item><title>Knee Deep in Trouble Merle Travis</title><link>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</link><pubDate>Thu, 03 Nov 2022 16:51:43 +0000</pubDate><guid>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</guid><description> (well I&amp;#39;m) kneeeeeeeeeeee deeeeeep in trouble (got the) saaaaaaame thing on my miiiiind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing meeee -- just keep a kiiilling tiiiiime (it&amp;#39;s agi)tating, wading -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come (to) looooung (I&amp;#39;ll be) kneeeeeeeeee eeeeeee deeeeep in trouble -- till my baby comes home (tururu) pa tu bu bruuuu bu pa pu (I&amp;#39;ve had the) mumps, the bumps, (and) all kinda trumps (I&amp;#39;ve had the) groove and the hoop (in) call (I&amp;#39;ve had the) aches, the shakes, -- and everythang it takes --(to) really bump the good man off (but have my) troubles double --looodi, what a muddle --everythang&amp;#39;s getting to beeeeeeeee -- aaaaammm standing knee deep in trouble --since my honey let me beeeee (well amm) kneeeeeee eeeeeee deeeep in trouble (got the) same thing on my maaaaaind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing me --(to) just keep the killing taaaaaaaaim (it&amp;#39;s agi)tating, wading, -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come(to) loooooong (I&amp;#39;ll be) kneeeeeeee eeeeeeee deeeep in trouble -- till my baby comes hoououo-ome -- till my baby comes home comon home, baby -- till my baby comes hooooouume taaaaa aaaa puruppuumm (mm)datt&amp;#39;tee du weeeeee</description><content:encoded><![CDATA[<figure class="center">
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Knee Deep in Trouble Merle Travis</title>
+      <link>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</link>
+      <pubDate>Thu, 03 Nov 2022 16:51:43 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</guid>
+      <description> (well I&amp;#39;m) kneeeeeeeeeeee deeeeeep in trouble (got the) saaaaaaame thing on my miiiiind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing meeee -- just keep a kiiilling tiiiiime (it&amp;#39;s agi)tating, wading -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come (to) looooung (I&amp;#39;ll be) kneeeeeeeeee eeeeeee deeeeep in trouble -- till my baby comes home (tururu) pa tu bu bruuuu bu pa pu (I&amp;#39;ve had the) mumps, the bumps, (and) all kinda trumps (I&amp;#39;ve had the) groove and the hoop (in) call (I&amp;#39;ve had the) aches, the shakes, -- and everythang it takes --(to) really bump the good man off (but have my) troubles double --looodi, what a muddle --everythang&amp;#39;s getting to beeeeeeeee -- aaaaammm standing knee deep in trouble --since my honey let me beeeee (well amm) kneeeeeee eeeeeee deeeep in trouble (got the) same thing on my maaaaaind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing me --(to) just keep the killing taaaaaaaaim (it&amp;#39;s agi)tating, wading, -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come(to) loooooong (I&amp;#39;ll be) kneeeeeeee eeeeeeee deeeep in trouble -- till my baby comes hoououo-ome -- till my baby comes home comon home, baby -- till my baby comes hooooouume taaaaa aaaa puruppuumm (mm)datt&amp;#39;tee du weeeeee </description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_03_16_49_10_050719f434.png"
          alt="travis smiling"/> 
 </figure>
@@ -325,11 +602,21 @@ hooooouume taaaaa
 aaaa puruppuumm
 (mm)datt&#39;tee du
 weeeeee
-</code></pre>]]></content:encoded></item><item><title>Using Android Xml Layouts With Jetpack Compose</title><link>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</link><pubDate>Thu, 03 Nov 2022 16:51:39 +0000</pubDate><guid>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</guid><description>The documentation suggests to use AndroidViewBinding API for the task.
+</code></pre>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Using Android Xml Layouts With Jetpack Compose</title>
+      <link>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</link>
+      <pubDate>Thu, 03 Nov 2022 16:51:39 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</guid>
+      <description>The documentation suggests to use AndroidViewBinding API for the task.
 I intended to learn Compose in my project, but also wanted a LineChart from MPAndroidChart library.
 Here is what I did. In the fragment:
 override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? { val lineChart = FragmentChartBinding.inflate(inflater) return ComposeView(requireContext()).apply { setContent { SetContent(viewModel, findNavController(), lineChart) } } } And in the composable:
-@Composable fun setChart( state: State&amp;lt;List&amp;lt;BodyMeasurement.</description><content:encoded><![CDATA[<figure class="center">
+@Composable fun setChart( state: State&amp;lt;List&amp;lt;BodyMeasurement.</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_03_16_50_26_9e06e66dfc.png"
          alt="heroes-logo"/> 
 </figure>
@@ -364,9 +651,19 @@ override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, save
 </span></span><span style="display:flex;"><span>)
 </span></span></code></pre></div><p>The samples that I found on the internet dealt with static views, so I wrote this little note. Enjoy!</p>
 <p>The quoted code is at <a href="https://github.com/pratclot/oxygentracker/blob/7cb153ca429818917f432c6a0a6ba9987a68618e/app/src/main/java/com/pratclot/oxygentracker/fragments/FragmentChart.kt">GitHub</a>.</p>
-]]></content:encoded></item><item><title>Strapi Gatsby Blog</title><link>http://localhost:1313/posts/strapi-gatsby-blog/</link><pubDate>Wed, 02 Nov 2022 13:13:31 +0000</pubDate><guid>http://localhost:1313/posts/strapi-gatsby-blog/</guid><description>Here is the path I took to host my personal site with Strapi + Gatsby setup.
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Strapi Gatsby Blog</title>
+      <link>http://localhost:1313/posts/strapi-gatsby-blog/</link>
+      <pubDate>Wed, 02 Nov 2022 13:13:31 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/strapi-gatsby-blog/</guid>
+      <description>Here is the path I took to host my personal site with Strapi + Gatsby setup.
 I had only one previous experience hosting a personal website, that was self hosting with Ghost platform version 3. It was a good one with a very intuitive article creation and editing process.
-I decided to try something else, and then learned there are headless CMS solutions which may work with any static site generator.</description><content:encoded><![CDATA[<figure class="center">
+I decided to try something else, and then learned there are headless CMS solutions which may work with any static site generator.</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_02_13_14_20_31889ed3e1.png"
          alt="strapi site picture"/> 
 </figure>
@@ -431,8 +728,18 @@ module.exports = {
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    curl https://pratclot.com --fail -I
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
 </span></span></code></pre></div><p>Basically, the above explains that I am too poor to have a container registry and k8s, so I transfer and run the container by hand :)</p>
-]]></content:encoded></item><item><title>Limit Network Bandwidth for a Virtual Machine on Linux</title><link>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</link><pubDate>Wed, 02 Nov 2022 11:52:38 +0000</pubDate><guid>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</guid><description>Something very useful - find the name of the virtual NIC on the host, and run a magical tc command:
-# ip l | grep vnet 47: vnet1: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc htb master virbr0 state UNKNOWN mode DEFAULT group default qlen 1000 # tc class change dev vnet1 classid 1:1 root htb rate 100Mbit Here is an example of me using it to choke Steam:</description><content:encoded><![CDATA[<figure class="center">
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Limit Network Bandwidth for a Virtual Machine on Linux</title>
+      <link>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</link>
+      <pubDate>Wed, 02 Nov 2022 11:52:38 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</guid>
+      <description>Something very useful - find the name of the virtual NIC on the host, and run a magical tc command:
+# ip l | grep vnet 47: vnet1: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc htb master virbr0 state UNKNOWN mode DEFAULT group default qlen 1000 # tc class change dev vnet1 classid 1:1 root htb rate 100Mbit Here is an example of me using it to choke Steam:</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_02_11_51_58_49f1f7aeb7.png"
          alt="linux terminal snippet"/> 
 </figure>
@@ -443,8 +750,18 @@ module.exports = {
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># tc class change dev vnet1 classid 1:1 root htb rate 100Mbit</span>
 </span></span></code></pre></div><p>Here is an example of me using it to choke Steam:</p>
 <p></p>
-]]></content:encoded></item><item><title>Qemu Passthrough for Sm2262 Sm2263 Based Ssd</title><link>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</link><pubDate>Wed, 02 Nov 2022 11:38:56 +0000</pubDate><guid>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</guid><description>I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described here:
-&amp;lt;hostdev mode=&amp;#34;subsystem&amp;#34; type=&amp;#34;pci&amp;#34; managed=&amp;#34;yes&amp;#34;&amp;gt; &amp;lt;source&amp;gt; &amp;lt;address domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x6f&amp;#34; slot=&amp;#34;0x00&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/source&amp;gt; &amp;lt;boot order=&amp;#34;1&amp;#34;/&amp;gt; &amp;lt;alias name=&amp;#34;ua-sm2262&amp;#34;/&amp;gt; &amp;lt;address type=&amp;#34;pci&amp;#34; domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x00&amp;#34; slot=&amp;#34;0x07&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/hostdev&amp;gt; &amp;lt;qemu:commandline&amp;gt; &amp;lt;qemu:arg value=&amp;#34;-set&amp;#34;/&amp;gt; &amp;lt;qemu:arg value=&amp;#34;device.ua-sm2262.x-msix-relocation=bar2&amp;#34;/&amp;gt; &amp;lt;/qemu:commandline&amp;gt; Since some release of qemu it seems to no longer work and give an error message like this:</description><content:encoded><![CDATA[<figure class="center">
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Qemu Passthrough for Sm2262 Sm2263 Based Ssd</title>
+      <link>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</link>
+      <pubDate>Wed, 02 Nov 2022 11:38:56 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</guid>
+      <description>I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described here:
+&amp;lt;hostdev mode=&amp;#34;subsystem&amp;#34; type=&amp;#34;pci&amp;#34; managed=&amp;#34;yes&amp;#34;&amp;gt; &amp;lt;source&amp;gt; &amp;lt;address domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x6f&amp;#34; slot=&amp;#34;0x00&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/source&amp;gt; &amp;lt;boot order=&amp;#34;1&amp;#34;/&amp;gt; &amp;lt;alias name=&amp;#34;ua-sm2262&amp;#34;/&amp;gt; &amp;lt;address type=&amp;#34;pci&amp;#34; domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x00&amp;#34; slot=&amp;#34;0x07&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/hostdev&amp;gt; &amp;lt;qemu:commandline&amp;gt; &amp;lt;qemu:arg value=&amp;#34;-set&amp;#34;/&amp;gt; &amp;lt;qemu:arg value=&amp;#34;device.ua-sm2262.x-msix-relocation=bar2&amp;#34;/&amp;gt; &amp;lt;/qemu:commandline&amp;gt; Since some release of qemu it seems to no longer work and give an error message like this:</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_02_11_39_11_87acee04fb.png"
          alt="picture of the error in Gnome interface"/> 
 </figure>
@@ -472,8 +789,18 @@ module.exports = {
       &lt;/qemu:frontend&gt;
     &lt;/qemu:device&gt;
   &lt;/qemu:override&gt;
-</code></pre>]]></content:encoded></item><item><title>Fingerstyle Tabs</title><link>http://localhost:1313/posts/fingerstyle-tabs/</link><pubDate>Wed, 02 Nov 2022 00:22:10 +0000</pubDate><guid>http://localhost:1313/posts/fingerstyle-tabs/</guid><description>I learnt how to play things on the guitar mostly because of great tabs published at https://frettedinstrumentsnyc.com. For me this was the only way to stay learning, because just doing &amp;ldquo;exercises&amp;rdquo; makes no sense to my brain as there is no music produced that is remotely pleasurable to hear.
-With the tabs you instead can already mimic your favorite tunes - all that is required is some technical work to make your fingers accustomed to the changes in chord shapes.</description><content:encoded><![CDATA[<figure class="center">
+</code></pre>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Fingerstyle Tabs</title>
+      <link>http://localhost:1313/posts/fingerstyle-tabs/</link>
+      <pubDate>Wed, 02 Nov 2022 00:22:10 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/fingerstyle-tabs/</guid>
+      <description>I learnt how to play things on the guitar mostly because of great tabs published at https://frettedinstrumentsnyc.com. For me this was the only way to stay learning, because just doing &amp;ldquo;exercises&amp;rdquo; makes no sense to my brain as there is no music produced that is remotely pleasurable to hear.
+With the tabs you instead can already mimic your favorite tunes - all that is required is some technical work to make your fingers accustomed to the changes in chord shapes.</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/photo_2022_11_02_00_19_59_36945e4e21.jpg"
          alt="heroes-logo"/> 
 </figure>
@@ -617,8 +944,18 @@ With the tabs you instead can already mimic your favorite tunes - all that is re
 </tr>
 </tbody>
 </table>
-]]></content:encoded></item><item><title>Encrypting Existing Linux Installation</title><link>http://localhost:1313/posts/encrypting-existing-linux-installation/</link><pubDate>Tue, 01 Nov 2022 23:38:50 +0000</pubDate><guid>http://localhost:1313/posts/encrypting-existing-linux-installation/</guid><description>I have an Arch (Gnome) on one physical disk and Ubuntu on another. At some point I decided to encrypt the Ubuntu installation. Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate boot /dev/nvme1n1p2 device to keep grub on, and it had its benefits too. Main bootloader lives on the Arch disk.
-I followed the steps on Arch wiki, but during the boot there was no prompt to put password for decryption.</description><content:encoded><![CDATA[<figure class="center">
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Encrypting Existing Linux Installation</title>
+      <link>http://localhost:1313/posts/encrypting-existing-linux-installation/</link>
+      <pubDate>Tue, 01 Nov 2022 23:38:50 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/encrypting-existing-linux-installation/</guid>
+      <description>I have an Arch (Gnome) on one physical disk and Ubuntu on another. At some point I decided to encrypt the Ubuntu installation. Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate boot /dev/nvme1n1p2 device to keep grub on, and it had its benefits too. Main bootloader lives on the Arch disk.
+I followed the steps on Arch wiki, but during the boot there was no prompt to put password for decryption.</description>
+      <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_03_15_02_35_d5756d2021.png"
          alt="picture of Ubuntu asking for a password to decrypt root disk"/> 
 </figure>
@@ -698,4 +1035,8 @@ Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cryptsetup luksOpen /dev/nvme0n1p1 cryptroot
 </span></span><span style="display:flex;"><span>exit
 </span></span></code></pre></div><p>And it immediately booted Ubuntu. Note that cryptsetup was not available until update-initramfs was able to see proper /etc/crypttab (or something similar that it relies on). I guess the equivalent configuration on Arch is done by mkinitcpio&rsquo;s HOOKS section.</p>
-]]></content:encoded></item></channel></rss>
+]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>
