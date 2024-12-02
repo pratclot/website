@@ -5,3 +5,9 @@ This will reload the site on edits and automatically navigate to most recent cha
 ```bash
 hugo server --watch -N
 ```
+
+# Create new content
+
+```bash
+hugo new content posts/stream-a-game-of-wingspan/index.md
+```

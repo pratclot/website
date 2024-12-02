@@ -6,212 +6,443 @@
     <description>Recent content on Orange Days</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Jun 2024 09:40:52 +0200</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Dec 2024 14:04:12 +0100</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stream a Game of Wingspan</title>
+      <link>http://localhost:1313/posts/stream-a-game-of-wingspan/</link>
+      <pubDate>Mon, 02 Dec 2024 14:04:12 +0100</pubDate>
+      
+      <guid>http://localhost:1313/posts/stream-a-game-of-wingspan/</guid>
+      <description>&lt;p&gt;This post is about a setup I use to play a physical version of a board game with my remote friend.&lt;/p&gt;
+&lt;p&gt;We played Wingspan down at the &lt;a href=&#34;https://boardgamearena.com/&#34;&gt;BGA&lt;/a&gt;, then learned there were more birds added in expansions, but they were not available on the site. We were not ready to pay for &lt;a href=&#34;https://tabletopia.com/&#34;&gt;tabletopia&lt;/a&gt;, and Steam version seemed to have unfriendly UI. On top of that, there was a desire to try a real version of the game given that I never had a board game in my life.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>This post is about a setup I use to play a physical version of a board game with my remote friend.</p>
+<p>We played Wingspan down at the <a href="https://boardgamearena.com/">BGA</a>, then learned there were more birds added in expansions, but they were not available on the site. We were not ready to pay for <a href="https://tabletopia.com/">tabletopia</a>, and Steam version seemed to have unfriendly UI. On top of that, there was a desire to try a real version of the game given that I never had a board game in my life.</p>
+<h2 id="how-we-play">How we play</h2>
+<p>Here is what it looks like for the viewer:</p>
+<p><img loading="lazy" src="/posts/stream-a-game-of-wingspan/images/overall.png" type="" alt="end result for the viewer"  /></p>
+<p>The server allows to zoom-in to see text &ldquo;better&rdquo;:
+<img loading="lazy" src="/posts/stream-a-game-of-wingspan/images/zoomedin.png" type="" alt="zoomed in end result for the viewer"  /></p>
+<h2 id="what-it-is-made-of">What it is made of</h2>
+<p>The setup for this is:</p>
+<ul>
+<li><a href="https://github.com/miroslavpejic85/mirotalkbro">mirotalkbro</a> to host streams in a browser</li>
+<li><a href="https://github.com/Genymobile/scrcpy">scrcpy</a> to capture game table with a phone</li>
+<li>Android phone with a 4k video recording support</li>
+</ul>
+<p>This is how the phone is placed:
+<img loading="lazy" src="/posts/stream-a-game-of-wingspan/images/image.png" type="" alt="holder for the phone"  /></p>
+<p>The cable connects it to computer, I believe it may use less battery compared to a wireless <code>adb</code> (plus slowly charge). You can use Android Studio to &ldquo;automatically&rdquo; connect to a wirelessly paired phone (just launch it and it will find the phone).</p>
+<p>Here are the commands for a Linux machine to capture the stream:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Mirotalk &#34;requires&#34; you to allow it to record both video and audio from your machine, so this is a user-end workaround to feed silence to it :)</span>
+</span></span><span style="display:flex;"><span>sudo modprobe snd-dummy
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add the dummy camera device</span>
+</span></span><span style="display:flex;"><span>sudo modprobe v4l2loopback
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Listing available cams, need to identify the v4l2 one</span>
+</span></span><span style="display:flex;"><span>v4l2-ctl --list-devices
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Now use /dev/video3 with scrcpy</span>
+</span></span><span style="display:flex;"><span>scrcpy --camera-id<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> --video-source<span style="color:#f92672">=</span>camera --camera-fps<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span> --camera-size<span style="color:#f92672">=</span>3840x2160 --no-audio --capture-orientation<span style="color:#f92672">=</span><span style="color:#ae81ff">180</span> --v4l2-sink<span style="color:#f92672">=</span>/dev/video3
+</span></span></code></pre></div><p>I <a href="https://github.com/miroslavpejic85/mirotalkbro/compare/main...pratclot:mirotalkbro:hack-some-zoom">tweaked</a> <code>mirotalkbro</code> a little to be able to zoom in where cursor is.</p>
+<h2 id="alternatives">Alternatives</h2>
+<p>Now, the <code>v4l2</code> cam is available to OBS too, so <code>mirotalk</code> technically is not even needed (you can stream to YouTube or Twitch directly). I did it because I like to self-host stuff, and could not get card text to be readable in Google Meet.</p>
+<p>On the other hand, one can use a <a href="https://app.lizardbyte.dev/Sunshine/">sunshine</a> + <a href="https://moonlight-stream.org/">moonlight</a> combo to stream a 4k <code>scrcpy</code> window.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>It seemed to be very important to have a 4k source video, otherwise the text would be blurry. I tried:</p>
+<ul>
+<li>a Full HD webcam</li>
+<li>running broadcast directly from an iPhone (because it would actually produce a 4k stream, but only in Safari :) Android phone sent a worse picture to the point of me thinking that it is not capable of a proper 4k)</li>
+<li>sharing a <code>scrcpy</code> window from the PC (works if the window is on a 4k display)</li>
+</ul>
+<p>Overall, I am very happy that this cheap setup can deliver a great experience. Many thanks to <code>scrcpy</code> creators, it is one of the tools that makes Android a better choice than an iPhone.</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Using VSCode</title>
       <link>http://localhost:1313/posts/using-vscode/</link>
       <pubDate>Mon, 24 Jun 2024 09:40:52 +0200</pubDate>
       
       <guid>http://localhost:1313/posts/using-vscode/</guid>
-      <description>Here are some actions and their shortcuts that will make you effective with VSCode.
-action shortcut notes search symbols ctrl + shift + o shows a searchable document structure, super handy for yaml or other long files navigation go to one of previous files ctrl + tab hold ctrl to observe a list of those find file by name ctrl + p makes it easy to navigate between files search any action ctrl + shift + p use this if you want to do something, but to not know a shortcut yet, or do not care to learn one open settings ctrl + , add a new line after current one ctrl + enter reformat document ctrl + shift + i there is nothing more daunting than formatting files by hand, this is not needed at all when you have &amp;ldquo;standard&amp;rdquo; formatting conventions.</description>
+      <description>&lt;p&gt;Here are some actions and their shortcuts that will make you effective with VSCode.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;action&lt;/th&gt;
+          &lt;th&gt;shortcut&lt;/th&gt;
+          &lt;th&gt;notes&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;search symbols&lt;/td&gt;
+          &lt;td&gt;ctrl + shift + o&lt;/td&gt;
+          &lt;td&gt;shows a searchable document structure, super handy for &lt;code&gt;yaml&lt;/code&gt; or other long files navigation&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;go to one of previous files&lt;/td&gt;
+          &lt;td&gt;ctrl + tab&lt;/td&gt;
+          &lt;td&gt;hold &lt;code&gt;ctrl&lt;/code&gt; to observe a list of those&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;find file by name&lt;/td&gt;
+          &lt;td&gt;ctrl + p&lt;/td&gt;
+          &lt;td&gt;makes it easy to navigate between files&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;search any action&lt;/td&gt;
+          &lt;td&gt;ctrl + shift + p&lt;/td&gt;
+          &lt;td&gt;use this if you want to do something, but to not know a shortcut yet, or do not care to learn one&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;open settings&lt;/td&gt;
+          &lt;td&gt;ctrl + ,&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;add a new line after current one&lt;/td&gt;
+          &lt;td&gt;ctrl + enter&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;reformat document&lt;/td&gt;
+          &lt;td&gt;ctrl + shift + i&lt;/td&gt;
+          &lt;td&gt;there is nothing more daunting than formatting files by hand, this is not needed at all when you have &amp;ldquo;standard&amp;rdquo; formatting conventions. This shortcut will make you happy and productive. &lt;code&gt;esbenp.prettier-vscode&lt;/code&gt; helped me to structure this table without going insane&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;open preview for a markdown file&lt;/td&gt;
+          &lt;td&gt;ctrl + shift + v&lt;/td&gt;
+          &lt;td&gt;it helps a lot to see a rendered file&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;ldquo;close&amp;rdquo; file&lt;/td&gt;
+          &lt;td&gt;ctrl + w&lt;/td&gt;
+          &lt;td&gt;this one feels natural for a browser user, but can be very unpleasant if you also like to use this key combo to delete a word, like you can do in &lt;code&gt;bash&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;delete current line&lt;/td&gt;
+          &lt;td&gt;ctrl + shift + k&lt;/td&gt;
+          &lt;td&gt;this is fastest way to delete a line, do not underestimate it&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;enable word wrapping&lt;/td&gt;
+          &lt;td&gt;alt + z&lt;/td&gt;
+          &lt;td&gt;very useful when you have lengthy lines, it removes the need to scroll horizontally to read them . This can also be enabled globally, search for &amp;ldquo;Word Wrap&amp;rdquo;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;show keybindings&lt;/td&gt;
+          &lt;td&gt;ctrl + k, ctrl + s&lt;/td&gt;
+          &lt;td&gt;allows to change some shortcuts if you like IDEA ones for example (like go back and forward)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;open extensions&lt;/td&gt;
+          &lt;td&gt;ctrl + shift + x&lt;/td&gt;
+          &lt;td&gt;a quick way to install more productivity helpers&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;show project files&lt;/td&gt;
+          &lt;td&gt;ctrl + shift + e&lt;/td&gt;
+          &lt;td&gt;it also helps to enable &amp;ldquo;Auto Reveal&amp;rdquo; setting if you feel more comfortable knowing where you are in the workspace now&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;toggle left bar&lt;/td&gt;
+          &lt;td&gt;ctrl + b&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;delete word&lt;/td&gt;
+          &lt;td&gt;ctrl + backspace&lt;/td&gt;
+          &lt;td&gt;it is better than holding backspace&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;open terminal&lt;/td&gt;
+          &lt;td&gt;ctrl + `&lt;/td&gt;
+          &lt;td&gt;this one really sucks on Mac&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;add cursor&lt;/td&gt;
+          &lt;td&gt;alt + click&lt;/td&gt;
+          &lt;td&gt;allows you to edit text in multiple places at once, do not forget to use this&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;rectangular selection&lt;/td&gt;
+          &lt;td&gt;alt + shift + click&lt;/td&gt;
+          &lt;td&gt;useful to know that something like this exists&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;comment current line&lt;/td&gt;
+          &lt;td&gt;ctrl + /&lt;/td&gt;
+          &lt;td&gt;IDEA also moves to the next line after commenting, which I find to be a superior implementation&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;show suggestions&lt;/td&gt;
+          &lt;td&gt;ctrl + space&lt;/td&gt;
+          &lt;td&gt;this is one of the best features of any text editor or IDE&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;open new window&lt;/td&gt;
+          &lt;td&gt;ctrl + shift + n&lt;/td&gt;
+          &lt;td&gt;may be needed when you are working with multiple unrelated directories&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;move line up&lt;/td&gt;
+          &lt;td&gt;alt + up&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;show quick fixes&lt;/td&gt;
+          &lt;td&gt;ctrl + .&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;go to next error&lt;/td&gt;
+          &lt;td&gt;f8&lt;/td&gt;
+          &lt;td&gt;this one is better in IDEA (f2), but I can live with that&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;rename symbol or file&lt;/td&gt;
+          &lt;td&gt;f2&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;find in file&lt;/td&gt;
+          &lt;td&gt;ctrl + f&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;replace in file&lt;/td&gt;
+          &lt;td&gt;ctrl + h&lt;/td&gt;
+          &lt;td&gt;you can also use selections to limit replacement scope&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;I like very much the shortcuts in IDEA on a Mac, mainly because it is way easier to press &lt;code&gt;cmd&lt;/code&gt; button than &lt;code&gt;ctrl + shift&lt;/code&gt; (IDEA&amp;rsquo;s Linux and Windows keymap blows, and I am wondering if I should also use &lt;code&gt;alt&lt;/code&gt; on Linux instead of &lt;code&gt;ctrl&lt;/code&gt;. I did this for Android Studio and could not have been happier). On the other hand, I do not like customizing things too much because it will make me dependent on a certain environment, and will surely render me unproductive outside of it. It was not easy to shift from Android Studio to VSCode for me, but I am happy that I did not try to overwrite all of the shortcuts and instead learned the standard ones in VSCode. There are a few that are ridiculously better in IDEA on a Mac though, here are the important ones that I use all the time:&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>Here are some actions and their shortcuts that will make you effective with VSCode.</p>
 <table>
-<thead>
-<tr>
-<th>action</th>
-<th>shortcut</th>
-<th>notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>search symbols</td>
-<td>ctrl + shift + o</td>
-<td>shows a searchable document structure, super handy for <code>yaml</code> or other long files navigation</td>
-</tr>
-<tr>
-<td>go to one of previous files</td>
-<td>ctrl + tab</td>
-<td>hold <code>ctrl</code> to observe a list of those</td>
-</tr>
-<tr>
-<td>find file by name</td>
-<td>ctrl + p</td>
-<td>makes it easy to navigate between files</td>
-</tr>
-<tr>
-<td>search any action</td>
-<td>ctrl + shift + p</td>
-<td>use this if you want to do something, but to not know a shortcut yet, or do not care to learn one</td>
-</tr>
-<tr>
-<td>open settings</td>
-<td>ctrl + ,</td>
-<td></td>
-</tr>
-<tr>
-<td>add a new line after current one</td>
-<td>ctrl + enter</td>
-<td></td>
-</tr>
-<tr>
-<td>reformat document</td>
-<td>ctrl + shift + i</td>
-<td>there is nothing more daunting than formatting files by hand, this is not needed at all when you have &ldquo;standard&rdquo; formatting conventions. This shortcut will make you happy and productive. <code>esbenp.prettier-vscode</code> helped me to structure this table without going insane</td>
-</tr>
-<tr>
-<td>open preview for a markdown file</td>
-<td>ctrl + shift + v</td>
-<td>it helps a lot to see a rendered file</td>
-</tr>
-<tr>
-<td>&ldquo;close&rdquo; file</td>
-<td>ctrl + w</td>
-<td>this one feels natural for a browser user, but can be very unpleasant if you also like to use this key combo to delete a word, like you can do in <code>bash</code></td>
-</tr>
-<tr>
-<td>delete current line</td>
-<td>ctrl + shift + k</td>
-<td>this is fastest way to delete a line, do not underestimate it</td>
-</tr>
-<tr>
-<td>enable word wrapping</td>
-<td>alt + z</td>
-<td>very useful when you have lengthy lines, it removes the need to scroll horizontally to read them . This can also be enabled globally, search for &ldquo;Word Wrap&rdquo;</td>
-</tr>
-<tr>
-<td>show keybindings</td>
-<td>ctrl + k, ctrl + s</td>
-<td>allows to change some shortcuts if you like IDEA ones for example (like go back and forward)</td>
-</tr>
-<tr>
-<td>open extensions</td>
-<td>ctrl + shift + x</td>
-<td>a quick way to install more productivity helpers</td>
-</tr>
-<tr>
-<td>show project files</td>
-<td>ctrl + shift + e</td>
-<td>it also helps to enable &ldquo;Auto Reveal&rdquo; setting if you feel more comfortable knowing where you are in the workspace now</td>
-</tr>
-<tr>
-<td>toggle left bar</td>
-<td>ctrl + b</td>
-<td></td>
-</tr>
-<tr>
-<td>delete word</td>
-<td>ctrl + backspace</td>
-<td>it is better than holding backspace</td>
-</tr>
-<tr>
-<td>open terminal</td>
-<td>ctrl + `</td>
-<td>this one really sucks on Mac</td>
-</tr>
-<tr>
-<td>add cursor</td>
-<td>alt + click</td>
-<td>allows you to edit text in multiple places at once, do not forget to use this</td>
-</tr>
-<tr>
-<td>rectangular selection</td>
-<td>alt + shift + click</td>
-<td>useful to know that something like this exists</td>
-</tr>
-<tr>
-<td>comment current line</td>
-<td>ctrl + /</td>
-<td>IDEA also moves to the next line after commenting, which I find to be a superior implementation</td>
-</tr>
-<tr>
-<td>show suggestions</td>
-<td>ctrl + space</td>
-<td>this is one of the best features of any text editor or IDE</td>
-</tr>
-<tr>
-<td>open new window</td>
-<td>ctrl + shift + n</td>
-<td>may be needed when you are working with multiple unrelated directories</td>
-</tr>
-<tr>
-<td>move line up</td>
-<td>alt + up</td>
-<td></td>
-</tr>
-<tr>
-<td>show quick fixes</td>
-<td>ctrl + .</td>
-<td></td>
-</tr>
-<tr>
-<td>go to next error</td>
-<td>f8</td>
-<td>this one is better in IDEA (f2), but I can live with that</td>
-</tr>
-<tr>
-<td>rename symbol or file</td>
-<td>f2</td>
-<td></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>action</th>
+          <th>shortcut</th>
+          <th>notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>search symbols</td>
+          <td>ctrl + shift + o</td>
+          <td>shows a searchable document structure, super handy for <code>yaml</code> or other long files navigation</td>
+      </tr>
+      <tr>
+          <td>go to one of previous files</td>
+          <td>ctrl + tab</td>
+          <td>hold <code>ctrl</code> to observe a list of those</td>
+      </tr>
+      <tr>
+          <td>find file by name</td>
+          <td>ctrl + p</td>
+          <td>makes it easy to navigate between files</td>
+      </tr>
+      <tr>
+          <td>search any action</td>
+          <td>ctrl + shift + p</td>
+          <td>use this if you want to do something, but to not know a shortcut yet, or do not care to learn one</td>
+      </tr>
+      <tr>
+          <td>open settings</td>
+          <td>ctrl + ,</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>add a new line after current one</td>
+          <td>ctrl + enter</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>reformat document</td>
+          <td>ctrl + shift + i</td>
+          <td>there is nothing more daunting than formatting files by hand, this is not needed at all when you have &ldquo;standard&rdquo; formatting conventions. This shortcut will make you happy and productive. <code>esbenp.prettier-vscode</code> helped me to structure this table without going insane</td>
+      </tr>
+      <tr>
+          <td>open preview for a markdown file</td>
+          <td>ctrl + shift + v</td>
+          <td>it helps a lot to see a rendered file</td>
+      </tr>
+      <tr>
+          <td>&ldquo;close&rdquo; file</td>
+          <td>ctrl + w</td>
+          <td>this one feels natural for a browser user, but can be very unpleasant if you also like to use this key combo to delete a word, like you can do in <code>bash</code></td>
+      </tr>
+      <tr>
+          <td>delete current line</td>
+          <td>ctrl + shift + k</td>
+          <td>this is fastest way to delete a line, do not underestimate it</td>
+      </tr>
+      <tr>
+          <td>enable word wrapping</td>
+          <td>alt + z</td>
+          <td>very useful when you have lengthy lines, it removes the need to scroll horizontally to read them . This can also be enabled globally, search for &ldquo;Word Wrap&rdquo;</td>
+      </tr>
+      <tr>
+          <td>show keybindings</td>
+          <td>ctrl + k, ctrl + s</td>
+          <td>allows to change some shortcuts if you like IDEA ones for example (like go back and forward)</td>
+      </tr>
+      <tr>
+          <td>open extensions</td>
+          <td>ctrl + shift + x</td>
+          <td>a quick way to install more productivity helpers</td>
+      </tr>
+      <tr>
+          <td>show project files</td>
+          <td>ctrl + shift + e</td>
+          <td>it also helps to enable &ldquo;Auto Reveal&rdquo; setting if you feel more comfortable knowing where you are in the workspace now</td>
+      </tr>
+      <tr>
+          <td>toggle left bar</td>
+          <td>ctrl + b</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>delete word</td>
+          <td>ctrl + backspace</td>
+          <td>it is better than holding backspace</td>
+      </tr>
+      <tr>
+          <td>open terminal</td>
+          <td>ctrl + `</td>
+          <td>this one really sucks on Mac</td>
+      </tr>
+      <tr>
+          <td>add cursor</td>
+          <td>alt + click</td>
+          <td>allows you to edit text in multiple places at once, do not forget to use this</td>
+      </tr>
+      <tr>
+          <td>rectangular selection</td>
+          <td>alt + shift + click</td>
+          <td>useful to know that something like this exists</td>
+      </tr>
+      <tr>
+          <td>comment current line</td>
+          <td>ctrl + /</td>
+          <td>IDEA also moves to the next line after commenting, which I find to be a superior implementation</td>
+      </tr>
+      <tr>
+          <td>show suggestions</td>
+          <td>ctrl + space</td>
+          <td>this is one of the best features of any text editor or IDE</td>
+      </tr>
+      <tr>
+          <td>open new window</td>
+          <td>ctrl + shift + n</td>
+          <td>may be needed when you are working with multiple unrelated directories</td>
+      </tr>
+      <tr>
+          <td>move line up</td>
+          <td>alt + up</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>show quick fixes</td>
+          <td>ctrl + .</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>go to next error</td>
+          <td>f8</td>
+          <td>this one is better in IDEA (f2), but I can live with that</td>
+      </tr>
+      <tr>
+          <td>rename symbol or file</td>
+          <td>f2</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>find in file</td>
+          <td>ctrl + f</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>replace in file</td>
+          <td>ctrl + h</td>
+          <td>you can also use selections to limit replacement scope</td>
+      </tr>
+  </tbody>
 </table>
 <p>I like very much the shortcuts in IDEA on a Mac, mainly because it is way easier to press <code>cmd</code> button than <code>ctrl + shift</code> (IDEA&rsquo;s Linux and Windows keymap blows, and I am wondering if I should also use <code>alt</code> on Linux instead of <code>ctrl</code>. I did this for Android Studio and could not have been happier). On the other hand, I do not like customizing things too much because it will make me dependent on a certain environment, and will surely render me unproductive outside of it. It was not easy to shift from Android Studio to VSCode for me, but I am happy that I did not try to overwrite all of the shortcuts and instead learned the standard ones in VSCode. There are a few that are ridiculously better in IDEA on a Mac though, here are the important ones that I use all the time:</p>
 <table>
-<thead>
-<tr>
-<th>action</th>
-<th>shortcut</th>
-<th>notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>show signature / parameter hints</td>
-<td>alt + p</td>
-<td>I use a custom shortcut that matches what I would <em>physically</em> press in IDEA</td>
-</tr>
-<tr>
-<td>go forward</td>
-<td>alt + ]</td>
-<td></td>
-</tr>
-<tr>
-<td>go back</td>
-<td>alt + [</td>
-<td></td>
-</tr>
-<tr>
-<td>duplicate line</td>
-<td>alt + d</td>
-<td>this one is super good because it does not require you to overwrite your clipboard. Speaking of clipboards, <code>CopyQ</code> is an excellent free tool that will serve as a backup for you memory, please include something like this in your arsenal</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>action</th>
+          <th>shortcut</th>
+          <th>notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>show signature / parameter hints</td>
+          <td>alt + p</td>
+          <td>I use a custom shortcut that matches what I would <em>physically</em> press in IDEA</td>
+      </tr>
+      <tr>
+          <td>go forward</td>
+          <td>alt + ]</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>go back</td>
+          <td>alt + [</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>duplicate line</td>
+          <td>alt + d</td>
+          <td>this one is super good because it does not require you to overwrite your clipboard. Speaking of clipboards, <code>CopyQ</code> is an excellent free tool that will serve as a backup for you memory, please include something like this in your arsenal</td>
+      </tr>
+  </tbody>
 </table>
 <p>Then there are a few super shortcuts that I like from default <code>bash</code> configuration. Those come from <code>emacs</code> actually, but I never it used, lol. You can configure this at OS-level on a Mac and Linux (they are handy in a browser too), in my case I had to overwrite those shortcuts in VSCode.</p>
 <table>
-<thead>
-<tr>
-<th>action</th>
-<th>shortcut</th>
-<th>notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>go line end</td>
-<td>ctrl + e</td>
-<td></td>
-</tr>
-<tr>
-<td>go line start</td>
-<td>ctrl + a</td>
-<td></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>action</th>
+          <th>shortcut</th>
+          <th>notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>go line end</td>
+          <td>ctrl + e</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>go line start</td>
+          <td>ctrl + a</td>
+          <td>one huge downside is that you will need to use something else for <code>select all</code> action, in my case I configured <code>alt + a</code> for VSCode, and use <code>ctrl + /</code> in browser</td>
+      </tr>
+  </tbody>
 </table>
 <p>A useful feature built into IDEA is bookmarks. It allows you to select certain places in a few of files you are currently working with, and quickly move between them. I use <code>alefragnani.Bookmarks</code> to have a similar functionality.</p>
+<table>
+  <thead>
+      <tr>
+          <th>action</th>
+          <th>shortcut</th>
+          <th>notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>place bookmark</td>
+          <td>f3</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>list bookmarks</td>
+          <td>alt + f3</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
 <p>Another helpful OS-level thing is to increase &ldquo;key repeat&rdquo; speed (and also decrease delay for it). You will anyway use arrows to navigate horizontally at some point, so why not make it faster and less annoying?</p>
 <p>Lastly, if you are writing a lot of readable text it is handy to have at least a spellchecker. I use <code>ban.spellright</code> as it claims to do everything offline. It does not check if your sentences are constructed properly though, another extension could probably help with that.</p>
 ]]></content:encoded>
@@ -223,8 +454,8 @@ action shortcut notes search symbols ctrl + shift + o shows a searchable documen
       <pubDate>Sat, 09 Mar 2024 22:01:22 +0100</pubDate>
       
       <guid>http://localhost:1313/posts/ip-camera-mail-relay/</guid>
-      <description>I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.
-There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.</description>
+      <description>&lt;p&gt;I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.&lt;/p&gt;
+&lt;p&gt;There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>I ran an Odroid C2 off site for periodic temperature measurements, relay control via GPIO and a mail relay for IP cameras. It served me well for about 7 years with no maintenance needed.</p>
 <p>There was a moment when Google deprecated SSL on their mail servers, and that made it impossible for Hikvision IP cams to send me pictures. Thankfully, it was possible to quickly hack together a relay on Odroid using Postfix which saved the day and worked ever since.</p>
 ]]></content:encoded>
@@ -236,7 +467,8 @@ There was a moment when Google deprecated SSL on their mail servers, and that ma
       <pubDate>Fri, 08 Mar 2024 18:01:38 +0100</pubDate>
       
       <guid>http://localhost:1313/posts/homelab/</guid>
-      <description>Preface I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &amp;ldquo;migration&amp;rdquo;.</description>
+      <description>&lt;h1 id=&#34;preface&#34;&gt;Preface&lt;/h1&gt;
+&lt;p&gt;I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &amp;ldquo;migration&amp;rdquo;.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h1 id="preface">Preface</h1>
 <p>I have been a loyal customer of Contabo for 5 years straight since 2018. They are a provider of the cheapest VPS in the world, mine was 4 CPU / 12 GB RAM / 300 GB SSD for about €9. There was even an update to the plan at some point where I could get 6 CPU / 16 GB RAM / 400 GB SSD for the same price, I just needed to pay them €25 to perform the &ldquo;migration&rdquo;.</p>
 <p>I worked as a &ldquo;DevOps&rdquo; guy at the time and was excited about all the tech. I used this VPS to run Gitlab, PowerDNS, Rocket.Chat, Jira, LDAP and a host of other things, all just to allow me to experiment with a &ldquo;live&rdquo; server.</p>
@@ -256,46 +488,46 @@ There was a moment when Google deprecated SSL on their mail servers, and that ma
 </ul>
 <p>Obviously, for me it was exciting to have new hardware at home, so I did not pay a lot of attention to the downsides (apart from the noise one). This is what I bought at the end of 2023 - beginning of 2024:</p>
 <table>
-<thead>
-<tr>
-<th>node</th>
-<th>CPU</th>
-<th>RAM</th>
-<th>DISK</th>
-<th>NIC</th>
-<th>cost</th>
-<th>cost breakdown: base + boot disk + storage + RAM + WiFi + Fan</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>NUC 12 tall</td>
-<td>i3</td>
-<td>32</td>
-<td>256 + 960</td>
-<td>2.5G x1</td>
-<td>€433</td>
-<td>300 + 30 + 43 + 60 + 0 + 0</td>
-</tr>
-<tr>
-<td>NUC 12</td>
-<td>i3</td>
-<td>32</td>
-<td>256 + 960</td>
-<td>2.5G x1</td>
-<td>€499</td>
-<td>340 + 25 + 74 + 60 + 0 + 0</td>
-</tr>
-<tr>
-<td>Topton Firewall</td>
-<td>N100</td>
-<td>32</td>
-<td>256 + 960</td>
-<td>2.5G x4</td>
-<td>€343</td>
-<td>163 + 22 + 40 + 65 + 40 + 13</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>node</th>
+          <th>CPU</th>
+          <th>RAM</th>
+          <th>DISK</th>
+          <th>NIC</th>
+          <th>cost</th>
+          <th>cost breakdown: base + boot disk + storage + RAM + WiFi + Fan</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>NUC 12 tall</td>
+          <td>i3</td>
+          <td>32</td>
+          <td>256 + 960</td>
+          <td>2.5G x1</td>
+          <td>€433</td>
+          <td>300 + 30 + 43 + 60 + 0 + 0</td>
+      </tr>
+      <tr>
+          <td>NUC 12</td>
+          <td>i3</td>
+          <td>32</td>
+          <td>256 + 960</td>
+          <td>2.5G x1</td>
+          <td>€499</td>
+          <td>340 + 25 + 74 + 60 + 0 + 0</td>
+      </tr>
+      <tr>
+          <td>Topton Firewall</td>
+          <td>N100</td>
+          <td>32</td>
+          <td>256 + 960</td>
+          <td>2.5G x4</td>
+          <td>€343</td>
+          <td>163 + 22 + 40 + 65 + 40 + 13</td>
+      </tr>
+  </tbody>
 </table>
 <p>N100 heated its NVMe SSD up to 100°C during initial observations, so I put ARCTIC P14 Slim on top of it. This test was with Proxmox installed there, and now there is plain Debian running with not much going on. It shows 53°C and I am happy.</p>
 <p>The plan was to run Proxmox on NUCs and use Ceph over 2.5G network. But then there was a <a href="https://fangpenlin.com/posts/2024/01/14/high-speed-usb4-mesh-network/">post on hacker news</a> that promised even better performance. Luckily for me, the NUCs have 2 Thunderbolt 4 ports each, which may give me about 32 Gbps of bandwidth. This is 4 GB per second, which is roughly what an NVMe SSD has locally for sequential writes.</p>
@@ -375,8 +607,13 @@ calico-node-q4jkn                          1/1     Running   3037 (5m38s ago)   
       <pubDate>Mon, 12 Dec 2022 21:00:43 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/heroes-3-tricks-to-extract-more-joy-from-the-game/</guid>
-      <description>I love to play random maps in Heroes 3 (original complete edition with the amazing HD Launcher) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.
-I remember coming across someone else&amp;rsquo;s saved games on our hostel&amp;rsquo;s LAN during my university days.</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_12_12_21_00_20_373890e61e.png&#34;
+         alt=&#34;heroes-logo&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;I love to play random maps in Heroes 3 (original complete edition with the amazing &lt;a href=&#34;https://sites.google.com/site/heroes3hd&#34;&gt;HD Launcher&lt;/a&gt;) against 7 original AI on Impossible difficulty, random choice of town. On top of that, my preferred mode of playing with a friend is Hot Seat. The following text is what keeps me enjoying this game after 20 years of playing and doing the same things over and over again.&lt;/p&gt;
+&lt;p&gt;I remember coming across someone else&amp;rsquo;s saved games on our hostel&amp;rsquo;s LAN during my university days. One of the save files had a level 20 hero at the start of month 3, with primary skills nearing 20&amp;rsquo;s. I was slightly bothered that the way me and my friend play the game becomes repetitive and boring, and after seeing that we are actually doing what a random fellow student is doing I became even more concerned.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_12_12_21_00_20_373890e61e.png"
          alt="heroes-logo"/> 
@@ -471,9 +708,14 @@ teach you how to survive even if you are getting hit in combat. My personal favo
       <pubDate>Sun, 04 Dec 2022 22:47:35 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/clone-disk-to-a-smaller-one-with-clonezilla/</guid>
-      <description>Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.
-In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.
-New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_12_04_23_06_57_d03e3ffaa3.png&#34;
+         alt=&#34;clonezilla image&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;Clonezilla allows to skip target disk size, and also has an option to create partitions on a new disk proportionally to the old ones.&lt;/p&gt;
+&lt;p&gt;In my case there was an HDD with 6 partitions and Windows 10, total size - 500 GB. The last three were C:, D: and the recovery image.&lt;/p&gt;
+&lt;p&gt;New SSD was only 240 GB, but as it turned out the partition backup made by Clonezilla took less than 200 GB.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_12_04_23_06_57_d03e3ffaa3.png"
          alt="clonezilla image"/> 
@@ -495,9 +737,19 @@ New SSD was only 240 GB, but as it turned out the partition backup made by Clone
       <pubDate>Fri, 04 Nov 2022 23:33:47 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/jetpack-compose-navigation-handling-of-hilt-view-model/</guid>
-      <description>Suppose you want to re-use a ViewModel across two full-screen composables, and for some reason you rely on hiltViewModel() from androidx.hilt:hilt-navigation-compose:1.0.0:
-@Composable fun Comp1(viewModel: SharedViewModel = hiltViewModel()) { ... } @Composable fun Comp2(viewModel: SharedViewModel = hiltViewModel()) { ... } Let&amp;rsquo;s imagine Comp1 navigates to Comp2.
-If you do not pass an explicit handle to existing instance of SharedViewModel to these composables, they will go ahead and create a new one for themselves.</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_11_04_23_35_16_f654b730eb.png&#34;
+         alt=&#34;hilt-logo&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;Suppose you want to re-use a ViewModel across two full-screen composables, and for some reason you rely on &lt;code&gt;hiltViewModel()&lt;/code&gt; from &lt;code&gt;androidx.hilt:hilt-navigation-compose:1.0.0&lt;/code&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@Composable
+fun Comp1(viewModel: SharedViewModel = hiltViewModel()) { ... }
+
+@Composable
+fun Comp2(viewModel: SharedViewModel = hiltViewModel()) { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let&amp;rsquo;s imagine &lt;code&gt;Comp1&lt;/code&gt; navigates to &lt;code&gt;Comp2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you do not pass an explicit handle to existing instance of &lt;code&gt;SharedViewModel&lt;/code&gt; to these composables, they will go ahead and create a new one for themselves.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_04_23_35_16_f654b730eb.png"
          alt="hilt-logo"/> 
@@ -528,7 +780,80 @@ fun Comp2(viewModel: SharedViewModel = hiltViewModel()) { ... }
       <pubDate>Thu, 03 Nov 2022 16:51:43 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/knee-deep-in-trouble-merle-travis/</guid>
-      <description> (well I&amp;#39;m) kneeeeeeeeeeee deeeeeep in trouble (got the) saaaaaaame thing on my miiiiind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing meeee -- just keep a kiiilling tiiiiime (it&amp;#39;s agi)tating, wading -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come (to) looooung (I&amp;#39;ll be) kneeeeeeeeee eeeeeee deeeeep in trouble -- till my baby comes home (tururu) pa tu bu bruuuu bu pa pu (I&amp;#39;ve had the) mumps, the bumps, (and) all kinda trumps (I&amp;#39;ve had the) groove and the hoop (in) call (I&amp;#39;ve had the) aches, the shakes, -- and everythang it takes --(to) really bump the good man off (but have my) troubles double --looodi, what a muddle --everythang&amp;#39;s getting to beeeeeeeee -- aaaaammm standing knee deep in trouble --since my honey let me beeeee (well amm) kneeeeeee eeeeeee deeeep in trouble (got the) same thing on my maaaaaind (there&amp;#39;s nothing) thrilling (and it&amp;#39;s a) killing me --(to) just keep the killing taaaaaaaaim (it&amp;#39;s agi)tating, wading, -- it&amp;#39;s aggravating (and I&amp;#39;m) left nothing come(to) loooooong (I&amp;#39;ll be) kneeeeeeee eeeeeeee deeeep in trouble -- till my baby comes hoououo-ome -- till my baby comes home comon home, baby -- till my baby comes hooooouume taaaaa aaaa puruppuumm (mm)datt&amp;#39;tee du weeeeee </description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_11_03_16_49_10_050719f434.png&#34;
+         alt=&#34;travis smiling&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;(well I&amp;#39;m) kneeeeeeeeeeee
+deeeeeep in trouble
+(got the) saaaaaaame thing on my
+miiiiind
+
+(there&amp;#39;s nothing) thrilling
+(and it&amp;#39;s a) killing meeee
+-- just keep a kiiilling
+tiiiiime
+
+(it&amp;#39;s agi)tating, wading
+-- it&amp;#39;s aggravating
+(and I&amp;#39;m) left nothing come
+(to) looooung
+
+(I&amp;#39;ll be) kneeeeeeeeee
+eeeeeee deeeeep in trouble
+-- till my baby comes
+home
+
+(tururu) pa tu bu bruuuu bu pa pu
+
+(I&amp;#39;ve had the) mumps, the bumps,
+(and) all kinda trumps
+(I&amp;#39;ve had the) groove and the hoop
+(in) call
+
+(I&amp;#39;ve had the) aches, the shakes,
+-- and everythang it takes
+--(to) really bump the good man
+off
+
+(but have my) troubles double
+--looodi, what a muddle
+--everythang&amp;#39;s getting to
+beeeeeeeee
+
+-- aaaaammm standing
+knee deep in trouble
+--since my honey let me
+beeeee
+
+(well amm) kneeeeeee
+eeeeeee deeeep in trouble
+(got the) same thing on my
+maaaaaind
+
+(there&amp;#39;s nothing) thrilling
+(and it&amp;#39;s a) killing me
+--(to) just keep the killing
+taaaaaaaaim
+
+(it&amp;#39;s agi)tating, wading,
+-- it&amp;#39;s aggravating
+(and I&amp;#39;m) left nothing come(to)
+loooooong
+
+(I&amp;#39;ll be) kneeeeeeee
+eeeeeeee deeeep in trouble
+-- till my baby comes
+hoououo-ome
+-- till my baby comes
+home comon home, baby
+-- till my baby comes
+hooooouume taaaaa
+aaaa puruppuumm
+(mm)datt&amp;#39;tee du
+weeeeee
+&lt;/code&gt;&lt;/pre&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_03_16_49_10_050719f434.png"
          alt="travis smiling"/> 
@@ -611,11 +936,27 @@ weeeeee
       <pubDate>Thu, 03 Nov 2022 16:51:39 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/using-android-xml-layouts-with-jetpack-compose/</guid>
-      <description>The documentation suggests to use AndroidViewBinding API for the task.
-I intended to learn Compose in my project, but also wanted a LineChart from MPAndroidChart library.
-Here is what I did. In the fragment:
-override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? { val lineChart = FragmentChartBinding.inflate(inflater) return ComposeView(requireContext()).apply { setContent { SetContent(viewModel, findNavController(), lineChart) } } } And in the composable:
-@Composable fun setChart( state: State&amp;lt;List&amp;lt;BodyMeasurement.</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_11_03_16_50_26_9e06e66dfc.png&#34;
+         alt=&#34;heroes-logo&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;The documentation suggests to use AndroidViewBinding API for the task.&lt;/p&gt;
+&lt;p&gt;I intended to learn Compose in my project, but also wanted a LineChart from MPAndroidChart library.&lt;/p&gt;
+&lt;p&gt;Here is what I did. In the fragment:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onCreateView&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        inflater: LayoutInflater,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        container: ViewGroup?,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        savedInstanceState: Bundle?
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ): View? {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; lineChart = &lt;span style=&#34;color:#a6e22e&#34;&gt;FragmentChartBinding&lt;/span&gt;.inflate(inflater)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ComposeView(requireContext()).apply {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            setContent {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                SetContent(viewModel, findNavController(), lineChart)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And in the composable:&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_03_16_50_26_9e06e66dfc.png"
          alt="heroes-logo"/> 
@@ -660,9 +1001,14 @@ override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, save
       <pubDate>Wed, 02 Nov 2022 13:13:31 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/strapi-gatsby-blog/</guid>
-      <description>Here is the path I took to host my personal site with Strapi + Gatsby setup.
-I had only one previous experience hosting a personal website, that was self hosting with Ghost platform version 3. It was a good one with a very intuitive article creation and editing process.
-I decided to try something else, and then learned there are headless CMS solutions which may work with any static site generator.</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_11_02_13_14_20_31889ed3e1.png&#34;
+         alt=&#34;strapi site picture&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;Here is the path I took to host my personal site with Strapi + Gatsby setup.&lt;/p&gt;
+&lt;p&gt;I had only one previous experience hosting a personal website, that was self hosting with &lt;a href=&#34;https://ghost.org/&#34;&gt;Ghost&lt;/a&gt; platform version 3. It was a good one with a very intuitive article creation and editing process.&lt;/p&gt;
+&lt;p&gt;I decided to try something else, and then learned there are headless CMS solutions which &lt;em&gt;may&lt;/em&gt; work with any static site generator. Compared to Ghost, that would require me to manage 2 systems, plus figure out how to integrate them. I spent a day learning about existing offers (&lt;a href=&#34;https://jamstack.org/headless-cms/&#34;&gt;this&lt;/a&gt; place is helpful), tried a few and quickly realized that the integration step is the main challenge in a split system approach.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_02_13_14_20_31889ed3e1.png"
          alt="strapi site picture"/> 
@@ -737,8 +1083,17 @@ module.exports = {
       <pubDate>Wed, 02 Nov 2022 11:52:38 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/limit-network-bandwidth-for-a-virtual-machine-on-linux/</guid>
-      <description>Something very useful - find the name of the virtual NIC on the host, and run a magical tc command:
-# ip l | grep vnet 47: vnet1: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc htb master virbr0 state UNKNOWN mode DEFAULT group default qlen 1000 # tc class change dev vnet1 classid 1:1 root htb rate 100Mbit Here is an example of me using it to choke Steam:</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_11_02_11_51_58_49f1f7aeb7.png&#34;
+         alt=&#34;linux terminal snippet&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;Something very useful - find the name of the virtual NIC on the host, and run a magical tc command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# ip l | grep vnet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;47: vnet1: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu &lt;span style=&#34;color:#ae81ff&#34;&gt;1500&lt;/span&gt; qdisc htb master virbr0 state UNKNOWN mode DEFAULT group default qlen &lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# tc class change dev vnet1 classid 1:1 root htb rate 100Mbit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here is an example of me using it to choke Steam:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_02_11_51_58_49f1f7aeb7.png"
          alt="linux terminal snippet"/> 
@@ -759,8 +1114,25 @@ module.exports = {
       <pubDate>Wed, 02 Nov 2022 11:38:56 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/qemu-passthrough-for-sm2262-sm2263-based-ssd/</guid>
-      <description>I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described here:
-&amp;lt;hostdev mode=&amp;#34;subsystem&amp;#34; type=&amp;#34;pci&amp;#34; managed=&amp;#34;yes&amp;#34;&amp;gt; &amp;lt;source&amp;gt; &amp;lt;address domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x6f&amp;#34; slot=&amp;#34;0x00&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/source&amp;gt; &amp;lt;boot order=&amp;#34;1&amp;#34;/&amp;gt; &amp;lt;alias name=&amp;#34;ua-sm2262&amp;#34;/&amp;gt; &amp;lt;address type=&amp;#34;pci&amp;#34; domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x00&amp;#34; slot=&amp;#34;0x07&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt; &amp;lt;/hostdev&amp;gt; &amp;lt;qemu:commandline&amp;gt; &amp;lt;qemu:arg value=&amp;#34;-set&amp;#34;/&amp;gt; &amp;lt;qemu:arg value=&amp;#34;device.ua-sm2262.x-msix-relocation=bar2&amp;#34;/&amp;gt; &amp;lt;/qemu:commandline&amp;gt; Since some release of qemu it seems to no longer work and give an error message like this:</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_11_02_11_39_11_87acee04fb.png&#34;
+         alt=&#34;picture of the error in Gnome interface&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;I have an NVMe device that I use to passthrough to a virtual machine on Linux. It has some internal issue, a workaround that worked for me so far was described &lt;a href=&#34;https://bugzilla.kernel.org/show_bug.cgi?id=202055#c42&#34;&gt;here&lt;/a&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;hostdev mode=&amp;#34;subsystem&amp;#34; type=&amp;#34;pci&amp;#34; managed=&amp;#34;yes&amp;#34;&amp;gt;
+  &amp;lt;source&amp;gt;
+    &amp;lt;address domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x6f&amp;#34; slot=&amp;#34;0x00&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt;
+  &amp;lt;/source&amp;gt;
+  &amp;lt;boot order=&amp;#34;1&amp;#34;/&amp;gt;
+  &amp;lt;alias name=&amp;#34;ua-sm2262&amp;#34;/&amp;gt;
+  &amp;lt;address type=&amp;#34;pci&amp;#34; domain=&amp;#34;0x0000&amp;#34; bus=&amp;#34;0x00&amp;#34; slot=&amp;#34;0x07&amp;#34; function=&amp;#34;0x0&amp;#34;/&amp;gt;
+&amp;lt;/hostdev&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  &amp;lt;qemu:commandline&amp;gt;
+    &amp;lt;qemu:arg value=&amp;#34;-set&amp;#34;/&amp;gt;
+    &amp;lt;qemu:arg value=&amp;#34;device.ua-sm2262.x-msix-relocation=bar2&amp;#34;/&amp;gt;
+  &amp;lt;/qemu:commandline&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Since some release of qemu it seems to no longer work and give an error message like this:&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_02_11_39_11_87acee04fb.png"
          alt="picture of the error in Gnome interface"/> 
@@ -798,8 +1170,13 @@ module.exports = {
       <pubDate>Wed, 02 Nov 2022 00:22:10 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/fingerstyle-tabs/</guid>
-      <description>I learnt how to play things on the guitar mostly because of great tabs published at https://frettedinstrumentsnyc.com. For me this was the only way to stay learning, because just doing &amp;ldquo;exercises&amp;rdquo; makes no sense to my brain as there is no music produced that is remotely pleasurable to hear.
-With the tabs you instead can already mimic your favorite tunes - all that is required is some technical work to make your fingers accustomed to the changes in chord shapes.</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/photo_2022_11_02_00_19_59_36945e4e21.jpg&#34;
+         alt=&#34;heroes-logo&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;I learnt how to play things on the guitar mostly because of great tabs published at &lt;a href=&#34;https://frettedinstrumentsnyc.com&#34;&gt;https://frettedinstrumentsnyc.com&lt;/a&gt;. For me this was the only way to stay learning, because just doing &amp;ldquo;exercises&amp;rdquo; makes no sense to my brain as there is no music produced that is remotely pleasurable to hear.&lt;/p&gt;
+&lt;p&gt;With the tabs you instead can already mimic your favorite tunes - all that is required is some technical work to make your fingers accustomed to the changes in chord shapes.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/photo_2022_11_02_00_19_59_36945e4e21.jpg"
          alt="heroes-logo"/> 
@@ -809,140 +1186,140 @@ With the tabs you instead can already mimic your favorite tunes - all that is re
 <p>With the tabs you instead can already mimic your favorite tunes - all that is required is some technical work to make your fingers accustomed to the changes in chord shapes.</p>
 <p>Because of this exposure to masterfully done tabs, after some years I found I can also put down some tunes which I learned by ear (and eyes). Below is the list of these horrible experiments so far:</p>
 <table>
-<thead>
-<tr>
-<th>Original Performer</th>
-<th>Tune</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Bruce Keener</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Son.pdf">Son</a></td>
-</tr>
-<tr>
-<td>Chet Atkins</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/The_House_In_New_Orleans.pdf">The House In New Orleans</a></td>
-</tr>
-<tr>
-<td>Chet Atkins</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Zing_Went_The_Strings_of_My_Heart.pdf">Zing Went The Strings of My Heart</a></td>
-</tr>
-<tr>
-<td>Chet Atkins</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Chet's_tune.pdf">Chet&rsquo;s Tune</a></td>
-</tr>
-<tr>
-<td>Chet Atkins</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Humoresque_Swanee_River.pdf">Humoresque / Swanee River</a></td>
-</tr>
-<tr>
-<td>Odell Martin</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Hello_Dolly.pdf">Hello Dolly</a></td>
-</tr>
-<tr>
-<td>Jerry Reed</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Another_Puff.pdf">Another Puff</a></td>
-</tr>
-<tr>
-<td>Chet and Jerry</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/I'll_Say_She_Does.pdf">I&rsquo;ll Say She Does</a></td>
-</tr>
-<tr>
-<td>Larry Odham</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Wrap%20Your%20Troubles%20In%20Dreams.pdf">Wrap Your Troubles In Dreams</a></td>
-</tr>
-<tr>
-<td>Hank Garland</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Sugarfoot_Rag.pdf">Sugarfoot Rag</a></td>
-</tr>
-<tr>
-<td>Arthur Smith &amp; Chet</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Sweet_Georgia_Brown.pdf">Sweet Georgia Brown</a></td>
-</tr>
-<tr>
-<td>Chet Atkins</td>
-<td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Man_of_Mystery.pdf">Man of Mystery</a></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Original Performer</th>
+          <th>Tune</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Bruce Keener</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Son.pdf">Son</a></td>
+      </tr>
+      <tr>
+          <td>Chet Atkins</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/The_House_In_New_Orleans.pdf">The House In New Orleans</a></td>
+      </tr>
+      <tr>
+          <td>Chet Atkins</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Zing_Went_The_Strings_of_My_Heart.pdf">Zing Went The Strings of My Heart</a></td>
+      </tr>
+      <tr>
+          <td>Chet Atkins</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Chet's_tune.pdf">Chet&rsquo;s Tune</a></td>
+      </tr>
+      <tr>
+          <td>Chet Atkins</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Humoresque_Swanee_River.pdf">Humoresque / Swanee River</a></td>
+      </tr>
+      <tr>
+          <td>Odell Martin</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Hello_Dolly.pdf">Hello Dolly</a></td>
+      </tr>
+      <tr>
+          <td>Jerry Reed</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Another_Puff.pdf">Another Puff</a></td>
+      </tr>
+      <tr>
+          <td>Chet and Jerry</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/I'll_Say_She_Does.pdf">I&rsquo;ll Say She Does</a></td>
+      </tr>
+      <tr>
+          <td>Larry Odham</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Wrap%20Your%20Troubles%20In%20Dreams.pdf">Wrap Your Troubles In Dreams</a></td>
+      </tr>
+      <tr>
+          <td>Hank Garland</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Sugarfoot_Rag.pdf">Sugarfoot Rag</a></td>
+      </tr>
+      <tr>
+          <td>Arthur Smith &amp; Chet</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Sweet_Georgia_Brown.pdf">Sweet Georgia Brown</a></td>
+      </tr>
+      <tr>
+          <td>Chet Atkins</td>
+          <td><a href="https://github.com/pratclot/tunes/blob/master/pdf/Man_of_Mystery.pdf">Man of Mystery</a></td>
+      </tr>
+  </tbody>
 </table>
 <p>I create the tabs with MuseScore3 since I like Linux more. I use GitHub to store them, so don&rsquo;t hesitate to correct me via issues!</p>
 <p>There are also many places where I found the inspiration to continue learning (with eyes and an unhealthy dose of rewinding):</p>
 <table>
-<thead>
-<tr>
-<th>Who</th>
-<th>Where</th>
-<th>What</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Larry Odham</td>
-<td><a href="https://www.youtube.com/c/LarryOdham">YouTube</a></td>
-<td>The most faithful Chet playing I have seen anywhere. There is a ton of highest quality original material too!</td>
-</tr>
-<tr>
-<td>Larisa Delisser</td>
-<td><a href="https://www.youtube.com/channel/UC0KgPQ70JHXC4hsYk3IHjvQ">YouTube</a></td>
-<td>Richard Smith plays Chet and Jerry tunes note-to-note live!</td>
-</tr>
-<tr>
-<td>Dow</td>
-<td><a href="https://www.youtube.com/user/texican65">YouTube</a></td>
-<td>Proper Jerry Reed spirit demonstration and cool lessons!</td>
-</tr>
-<tr>
-<td>Phil Hunt</td>
-<td><a href="https://www.youtube.com/user/muzikman74">YouTube</a></td>
-<td>Excellent Jerry Reed instructions. You can also get drawn into <a href="https://www.youtube.com/channel/UCn61rDqQqA-EoZNdsMQwmuQ">Eddie&rsquo;s channel</a> from there.</td>
-</tr>
-<tr>
-<td>Jonathan Stout</td>
-<td><a href="https://www.youtube.com/user/campusfive">YouTube</a></td>
-<td>A breath of fresh air when you have a Chet-crisis!</td>
-</tr>
-<tr>
-<td>Gombak Hillbillies</td>
-<td><a href="https://www.youtube.com/user/gombakhillbillies">YouTube</a></td>
-<td>Here&rsquo;s an example of what real talent looks like.</td>
-</tr>
-<tr>
-<td>The Real Merle Travis Guitar</td>
-<td>Whereever you can get it</td>
-<td>Thom Bresh explains what Travis Picking is really.</td>
-</tr>
-<tr>
-<td>g0g0g0rilla</td>
-<td><a href="https://www.youtube.com/user/punkrock1192">YouTube</a></td>
-<td>A dedicated fingerstyle fan with a lot of originals. Just look at &ldquo;The Claw&rdquo; to get my idea of &ldquo;dedicated&rdquo;.</td>
-</tr>
-<tr>
-<td>Francois Ledouc</td>
-<td><a href="https://www.youtube.com/c/Fran%C3%A7oisLeduc">YouTube</a></td>
-<td>Perfect tabs, not only fingerstyle.</td>
-</tr>
-<tr>
-<td>Valentin Voyer</td>
-<td><a href="https://www.youtube.com/c/ValentinVoyerTranscriptionsLibrary">YouTube</a></td>
-<td>Again, perfect transcriptions.</td>
-</tr>
-<tr>
-<td>Craig Dobbins</td>
-<td><a href="http://www.craigdobbins.com/instruction.html">http://www.craigdobbins.com/</a></td>
-<td>Get everything you can.</td>
-</tr>
-<tr>
-<td>James Shannon</td>
-<td><a href="https://www.youtube.com/user/MrShazzar">YouTube</a></td>
-<td>Check out Postman Pat!</td>
-</tr>
-<tr>
-<td>Leon Grizzard</td>
-<td><a href="https://www.youtube.com/user/ljgaustin">YouTube</a></td>
-<td>How to play Western Swing, this is totally needed to play rhythm guitar in a non-boring way.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Who</th>
+          <th>Where</th>
+          <th>What</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Larry Odham</td>
+          <td><a href="https://www.youtube.com/c/LarryOdham">YouTube</a></td>
+          <td>The most faithful Chet playing I have seen anywhere. There is a ton of highest quality original material too!</td>
+      </tr>
+      <tr>
+          <td>Larisa Delisser</td>
+          <td><a href="https://www.youtube.com/channel/UC0KgPQ70JHXC4hsYk3IHjvQ">YouTube</a></td>
+          <td>Richard Smith plays Chet and Jerry tunes note-to-note live!</td>
+      </tr>
+      <tr>
+          <td>Dow</td>
+          <td><a href="https://www.youtube.com/user/texican65">YouTube</a></td>
+          <td>Proper Jerry Reed spirit demonstration and cool lessons!</td>
+      </tr>
+      <tr>
+          <td>Phil Hunt</td>
+          <td><a href="https://www.youtube.com/user/muzikman74">YouTube</a></td>
+          <td>Excellent Jerry Reed instructions. You can also get drawn into <a href="https://www.youtube.com/channel/UCn61rDqQqA-EoZNdsMQwmuQ">Eddie&rsquo;s channel</a> from there.</td>
+      </tr>
+      <tr>
+          <td>Jonathan Stout</td>
+          <td><a href="https://www.youtube.com/user/campusfive">YouTube</a></td>
+          <td>A breath of fresh air when you have a Chet-crisis!</td>
+      </tr>
+      <tr>
+          <td>Gombak Hillbillies</td>
+          <td><a href="https://www.youtube.com/user/gombakhillbillies">YouTube</a></td>
+          <td>Here&rsquo;s an example of what real talent looks like.</td>
+      </tr>
+      <tr>
+          <td>The Real Merle Travis Guitar</td>
+          <td>Whereever you can get it</td>
+          <td>Thom Bresh explains what Travis Picking is really.</td>
+      </tr>
+      <tr>
+          <td>g0g0g0rilla</td>
+          <td><a href="https://www.youtube.com/user/punkrock1192">YouTube</a></td>
+          <td>A dedicated fingerstyle fan with a lot of originals. Just look at &ldquo;The Claw&rdquo; to get my idea of &ldquo;dedicated&rdquo;.</td>
+      </tr>
+      <tr>
+          <td>Francois Ledouc</td>
+          <td><a href="https://www.youtube.com/c/Fran%C3%A7oisLeduc">YouTube</a></td>
+          <td>Perfect tabs, not only fingerstyle.</td>
+      </tr>
+      <tr>
+          <td>Valentin Voyer</td>
+          <td><a href="https://www.youtube.com/c/ValentinVoyerTranscriptionsLibrary">YouTube</a></td>
+          <td>Again, perfect transcriptions.</td>
+      </tr>
+      <tr>
+          <td>Craig Dobbins</td>
+          <td><a href="http://www.craigdobbins.com/instruction.html">http://www.craigdobbins.com/</a></td>
+          <td>Get everything you can.</td>
+      </tr>
+      <tr>
+          <td>James Shannon</td>
+          <td><a href="https://www.youtube.com/user/MrShazzar">YouTube</a></td>
+          <td>Check out Postman Pat!</td>
+      </tr>
+      <tr>
+          <td>Leon Grizzard</td>
+          <td><a href="https://www.youtube.com/user/ljgaustin">YouTube</a></td>
+          <td>How to play Western Swing, this is totally needed to play rhythm guitar in a non-boring way.</td>
+      </tr>
+  </tbody>
 </table>
 ]]></content:encoded>
     </item>
@@ -953,8 +1330,14 @@ With the tabs you instead can already mimic your favorite tunes - all that is re
       <pubDate>Tue, 01 Nov 2022 23:38:50 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/encrypting-existing-linux-installation/</guid>
-      <description>I have an Arch (Gnome) on one physical disk and Ubuntu on another. At some point I decided to encrypt the Ubuntu installation. Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate boot /dev/nvme1n1p2 device to keep grub on, and it had its benefits too. Main bootloader lives on the Arch disk.
-I followed the steps on Arch wiki, but during the boot there was no prompt to put password for decryption.</description>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    &lt;img loading=&#34;lazy&#34; src=&#34;./images/Screenshot_from_2022_11_03_15_02_35_d5756d2021.png&#34;
+         alt=&#34;picture of Ubuntu asking for a password to decrypt root disk&#34;/&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;I have an Arch (Gnome) on one physical disk and Ubuntu on another. At some point I decided to encrypt the Ubuntu installation.
+Ubuntu was just sitting on a simple /dev/nvme1n1p1 partition. I added a separate boot /dev/nvme1n1p2 device to keep grub on, and it had its benefits too. Main bootloader lives on the Arch disk.&lt;/p&gt;
+&lt;p&gt;I followed the steps on Arch wiki, but during the boot there was no prompt to put password for decryption.&lt;/p&gt;</description>
       <content:encoded><![CDATA[<figure class="center">
     <img loading="lazy" src="./images/Screenshot_from_2022_11_03_15_02_35_d5756d2021.png"
          alt="picture of Ubuntu asking for a password to decrypt root disk"/> 
